@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "v738FBaUWL+pOptkOR/RYIWYwHzlYLTQOfo33UoUp5E7vY6qitPYHb5PJDyHjFeeI5QqYZU8TQVKlF0S5nlRkg==",
+  "dgSpecHash": "+rcGGNNU8K/b7nVCl5DGbQis4eKVwknevnEg5RsESMC1n7vr46N2WiK1HGCcKsEXk5IUuCIUhuQ/Y7mXbociPw==",
   "success": true,
-  "projectFilePath": "E:\\INZ\\proj\\Web-learning\\proj\\proj.csproj",
+  "projectFilePath": "E:\\inzynieria\\Web-learning\\proj\\proj.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\eberi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\Kazuren\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
   ],
   "logs": []
 }

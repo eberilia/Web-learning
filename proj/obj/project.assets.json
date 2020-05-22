@@ -8,20 +8,25 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\eberi\\.nuget\\packages\\": {}
+    "C:\\Users\\Kazuren\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\INZ\\proj\\Web-learning\\proj\\proj.csproj",
+      "projectUniqueName": "E:\\inzynieria\\Web-learning\\proj\\proj.csproj",
       "projectName": "proj",
-      "projectPath": "E:\\INZ\\proj\\Web-learning\\proj\\proj.csproj",
-      "packagesPath": "C:\\Users\\eberi\\.nuget\\packages\\",
-      "outputPath": "E:\\INZ\\proj\\Web-learning\\proj\\obj\\",
+      "projectPath": "E:\\inzynieria\\Web-learning\\proj\\proj.csproj",
+      "packagesPath": "C:\\Users\\Kazuren\\.nuget\\packages\\",
+      "outputPath": "E:\\inzynieria\\Web-learning\\proj\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\eberi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Kazuren\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
