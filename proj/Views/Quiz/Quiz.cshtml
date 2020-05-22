@@ -5,27 +5,24 @@
 }
 
 
-<div>
-    <h2>Pytanie </h2>
-    <br />
-
-    <input id="A" type="button" value="A" />
-    <br />
-
-    <input id="B" type="button" value="B" />
-    <br />
-
-    <input id="C" type="button" value="C" />
-    <br /><br />
-
     <div>
-        <input id="DALEJ" onclick="location.href='@Url.Action("Index", "Home")'" type="submit" value="DALEJ" />
+        <h2>Pytanie </h2>
+        <br />
+
+        <p>Ile boków ma prostokąt?<p>
+
+            <label><input id="1" type="radio" name="answer"> 2</label><br />
+            <label><input id="2" type="radio" name="answer"> 3</label><br />
+            <label><input id="3" type="radio" name="answer"> 4</label><br />
+
+            <input id="3" onclick="Dobrze!" type="submit" value="button" />
+
+            <div>
+                <input id="Koniec" onclick="location.href='@Url.Action("Stats", "Quiz")'" type="submit" value="KONIEC" />
+            </div>
+
     </div>
 
-</div>
 
-    Formularz
-<br />
-<br />
 
 

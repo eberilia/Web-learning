@@ -17,5 +17,10 @@ namespace proj.Controllers
         {
             return View();
         }
+
+        public IActionResult Stats()
+        {
+            return View();
+        }
     }
 }
