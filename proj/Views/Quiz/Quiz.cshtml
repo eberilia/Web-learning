@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+    <div>
+        <h2>Pytanie </h2>
+        <br />
+
+        <p>Ile boków ma prostokąt?<p>
+
+            <label><input id="1" type="radio" name="answer"> 2</label><br />
+            <label><input id="2" type="radio" name="answer"> 3</label><br />
+            <label><input id="3" type="radio" name="answer"> 4</label><br />
+
+            <input id="3" onclick="Dobrze!" type="submit" value="button" />
+
+            <div>
+                <input id="Koniec" onclick="location.href='@Url.Action("Stats", "Quiz")'" type="submit" value="KONIEC" />
+            </div>
+
+    </div>
+
+
+
+
