@@ -1,31 +1,68 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model proj.Models.Quiz
 @{
 }
 
+    <div class="text-center">
 
-<div>
-    <h2>Pytanie </h2>
+        <p>DZIAŁA QUIZ O ID:</p>
+        @ViewData["ID"]
+
+        <form asp-action="Stats">
+            @{
+
+                int j = 1;
+
+                foreach (Question q in Model.Questions)
+                {
+                    <p>@q.TextQuestion</p>
+
+
+                    string n = "q" + j;
+
+
+                    for (int i = 0; i < q.Answers.Count; i++)
+                    {
+                        string id = n + "a" + (i + 1);
+                        <input type="radio" id=@id name=@n value="@q.TextAnswers[i]">
+                        <label for=@id>@q.TextAnswers[i]</label><br>
+                    }
+
+                    j++;
+                }
+
+                <input type="submit" value="Koniec">
+
+            }
+        </form>
+
+
+        <!--
+
     <br />
+    <h4>STATYCZNY QUIZ - OLD VERSION</h4>
+    <form asp-action="Stats">
+        <p>Ile bokow ma kwadrat</p>
+        <input type="radio" id="q1id1" name="q1" value="2">
+        <label for="q1id1">2</label><br>
+        <input type="radio" id="q1id2" name="q1" value="3">
+        <label for="q1id2">3</label><br>
+        <input type="radio" id="q1id3" name="q1" value="4">
+        <label for="q1id3">4</label>
 
-    <input id="A" type="button" value="A" />
-    <br />
+        <br>
+        <br>
 
-    <input id="B" type="button" value="B" />
-    <br />
+        <p>Cos0 to....?</p>
+        <input type="radio" id="q2id1" name="q2" value="(pierwiastek z 2)/2">
+        <label for="q2id1">(pierwiastek z 2)/2</label><br>
+        <input type="radio" id="q2id2" name="q2" value="0">
+        <label for="q2id2">0</label><br>
+        <input type="radio" id="q2id3" name="q2" value="1">
+        <label for="q2id3">1</label><br><br>
 
-    <input id="C" type="button" value="C" />
-    <br /><br />
+        <input type="submit" value="Koniec">
+    </form>-->
 
-    <div>
-        <input id="DALEJ" onclick="location.href='@Url.Action("Index", "Home")'" type="submit" value="DALEJ" />
     </div>
-
-</div>
-
-    Formularz
-<br />
-<br />
 
 

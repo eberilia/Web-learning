@@ -1,22 +1,24 @@
-﻿<!-- @*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-    -->
-
+﻿@model proj.Models.Score
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div>
-    <h3>GRATULACJE!</h3>
-    <p>Udało Ci się ukończyć test z wynikiem:</p>
+
+    <p>Twoja odp na pyt 1: @ViewData["Q1"]</p>
+    <p>Twoja odp na pyt 2: @ViewData["Q2"]</p>
+    
+
+
+
+
 </div>
 
 <div>
-    <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="button" />
+    <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" />
 </div>
 
 <div>
-    <input id="TryAgain"  onclick="location.href='@Url.Action("Quiz", "Quiz")'" type="button" value="button" />
+    <input id="TryAgain" onclick="location.href='@Url.Action("Quiz", "Quiz")'" type="button" value="Spróbuj jeszcze raz" />
 </div>
 
