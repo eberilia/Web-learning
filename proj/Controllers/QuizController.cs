@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,7 @@ namespace proj.Controllers
 
             Quiz q = new Quiz();
             q.Questions = new List<Question>();
+            q.IdQuiz = ID;
             
             /* Tworzenie pytania */
             Question x = new Question();
@@ -70,7 +72,31 @@ namespace proj.Controllers
             ViewData["Q1"] = q1;
             ViewData["Q2"] = q2;
 
-            return View();
+            //czytanie z bazy danych poprawnych odp
+           
+            Score sc = new Score();
+            sc.UserCorrectnessAnswers = new List<bool>();
+
+            if(q1.Equals("90"))
+            {
+                sc.UserCorrectnessAnswers.Add(true);
+            }
+            else
+            {
+                sc.UserCorrectnessAnswers.Add(false);
+            }
+
+            if(q2.Equals("Czerwonego i bialego"))
+            {
+                sc.UserCorrectnessAnswers.Add(true);
+            }
+            else
+            {
+                sc.UserCorrectnessAnswers.Add(false);
+            }
+
+
+            return View(sc);
         }
 
         

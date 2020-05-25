@@ -3,16 +3,47 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div>
+    <div>
+        <h2> GRATULACJE! Twoj wynik: </h2>
+        <h1> @Model.GetPercent() %</h1>
+        <h4>Czyli w sumie zdobyles @Model.GetPoints() na @Model.UserCorrectnessAnswers.Count punkty.</h4>
+    </div>
 
-    <p>Twoja odp na pyt 1: @ViewData["Q1"]</p>
-    <p>Twoja odp na pyt 2: @ViewData["Q2"]</p>
+    <div>
+        @{ 
+            for(int i=0; i<Model.UserCorrectnessAnswers.Count; i++)
+            {
+                string n = "Q" + (i + 1);
+
+                <p>Pytanie @(i+1), Twoja odpowiedz: @ViewData[n]</p>
+
+                if(Model.UserCorrectnessAnswers[i] == true)
+                {
+                    <p> I jest to poprawna odpowiedz! </p>
+                }
+                else
+                { 
+                    <p>BLAD!</p>
+                }
+
+                <br />
+
+            }
+
+        }
+    </div>
+        <!-- <p>Odp na pyt 1: @ViewData["Q1"]</p>
+       
+        if ( Model.UserCorrectnessAnswers[0] == true )
+            <p> Poprawna odpowiedz.</p>
+        else
+            <p> BLAD! </ p >
+
     
+           <p>Odp na pyt 2: @ViewData["Q2"]</p>-->
 
 
-
-
-</div>
+    
 
 <div>
     <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" />
