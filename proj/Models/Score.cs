@@ -8,12 +8,23 @@ namespace proj.Models
 {
     public class Score
     {
+        
+
         public List<bool> UserCorrectnessAnswers { get; set; }
+
+        public Score()
+        {
+            UserCorrectnessAnswers = new List<bool>();
+        }
+
 
         public uint GetPoints()
         {
             uint points = 0;
-
+            /*foreach(bool a in UserCorrectnessAnswers)
+                if (a)
+                    points++;*/
+            
             for(uint i=0; i<UserCorrectnessAnswers.Count; i++)
             {
                 if (UserCorrectnessAnswers[(int)i] == true)

@@ -9,5 +9,11 @@ namespace proj.Models
     {
         public uint IdQuiz { get; set; }
         public List<Question> Questions { get; set; }
+
+        public Quiz()
+        {
+            Questions = new List<Question>();
+        }
+
     }
 }

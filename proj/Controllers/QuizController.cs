@@ -22,16 +22,15 @@ namespace proj.Controllers
             ViewData["ID"] = ID;
 
              // TO DO - odszukaj quizu o id w bazie i stworz nowa zmienna Quiz o tych parametrach
+             //baza danych zwroc mi obiekt typu quiz o id takim
+             // quiz q = pobierz z bazy
 
             Quiz q = new Quiz();
-            q.Questions = new List<Question>();
             q.IdQuiz = ID;
             
             /* Tworzenie pytania */
             Question x = new Question();
-            x.TextAnswers = new List<string>();
-            x.Answers = new List<bool>();
-
+       
             x.TextQuestion = "Ile stopni ma kat prosty?";
 
             x.TextAnswers.Add("60");
@@ -47,9 +46,7 @@ namespace proj.Controllers
 
 
             Question y = new Question();
-            y.TextAnswers = new List<string>();
-            y.Answers = new List<bool>();
-
+            
             y.TextQuestion = "Kolor rozowy powstaje z polaczenia kolorow: ";
 
             y.TextAnswers.Add("Czerwonego i bialego");
@@ -72,10 +69,15 @@ namespace proj.Controllers
             ViewData["Q1"] = q1;
             ViewData["Q2"] = q2;
 
-            //czytanie z bazy danych poprawnych odp
-           
+
+            // string id quizu pobrane z formularza
+            // Score sc = new Score(String ID formularza);
+            // Score -> czytanie z bazy danych poprawnych odp
+            // sc.generateScore([])
+            // return view(sc)
+            //
+
             Score sc = new Score();
-            sc.UserCorrectnessAnswers = new List<bool>();
 
             if(q1.Equals("90"))
             {
