@@ -33,15 +33,10 @@ namespace proj.Controllers
        
             x.TextQuestion = "Ile stopni ma kat prosty?";
 
-            x.TextAnswers.Add("60");
-            x.TextAnswers.Add("120");
-            x.TextAnswers.Add("90");
-
-            x.Answers.Add(false);
-            x.Answers.Add(false);
-            x.Answers.Add(true);
-
-            /* Dodanie pytania do Quizu*/
+            x.Answers.Add("60", false);
+            x.Answers.Add("120", false);
+            x.Answers.Add("90", true);
+          
             q.Questions.Add(x);
 
 
@@ -49,15 +44,10 @@ namespace proj.Controllers
             
             y.TextQuestion = "Kolor rozowy powstaje z polaczenia kolorow: ";
 
-            y.TextAnswers.Add("Czerwonego i bialego");
-            y.TextAnswers.Add("Zielonego i zoltego");
-            y.TextAnswers.Add("Niebieskiego i czarnego");
-            y.TextAnswers.Add("Pomaranczowego i czerwonego");
-
-            y.Answers.Add(true);
-            y.Answers.Add(false);
-            y.Answers.Add(false);
-            y.Answers.Add(false);
+            y.Answers.Add("Czerwonego i bialego", true);
+            y.Answers.Add("Zielonego i zoltego", false);
+            y.Answers.Add("Niebieskiego i czarnego", false);
+            y.Answers.Add("Pomaranczowego i czerwonego", false);
 
             q.Questions.Add(y);
 

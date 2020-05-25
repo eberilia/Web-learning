@@ -15,5 +15,10 @@ namespace proj.Models
             Questions = new List<Question>();
         }
 
+        public Quiz(uint idQuiz)
+        {
+            IdQuiz = idQuiz;
+            Questions = new List<Question>();
+        }
     }
 }
