@@ -2,9 +2,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Strona główna Quizów</h1>
-    <p>Coś tam coś tam jakieś treści...</p>
-    <p>Wejdź i wyszukaj quiz dla siebie! (lub kiedyś stwórz swój. ale to kiedyś) </p>
-    <input id="Start" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Wyszukaj quiz" class="btn btn-primary btn-lg" />
-</div>
+
+    <div class="jumbotron">
+        <h1 class="display-4">Strona główna Quizów</h1>
+        <p class="lead">Coś tam coś tam jakieś treści...</p>
+        <hr class="my-4">
+        <p>Wejdź i wyszukaj quiz dla siebie! (lub kiedyś stwórz swój. ale to kiedyś)</p>
+        <input id="Start" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Wyszukaj quiz" class="btn btn-primary btn-lg" />
+        <input id="Nowy" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Stwórz nowy quiz" class="btn btn-primary btn-lg" />
+    </div>
+

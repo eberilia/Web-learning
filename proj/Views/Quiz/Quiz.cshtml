@@ -2,41 +2,40 @@
 @{
 }
 
-    <div class="text-center">
+    <div class="jumbotron">
+        <form asp-action="Stats">
+            <h1 class="display-4">QUIZ O ID: @ViewData["ID"]</h1>
+            @{
+                int j = 1;
 
-        <p>DZIAŁA QUIZ O ID:</p>
-        @ViewData["ID"]
-
-    <form asp-action="Stats">
-        @{
-
-            int j = 1;
-
-            foreach (Question q in Model.Questions)
-            {
-                <p>@q.TextQuestion</p>
-
-
-                string n = "q" + j;
-
-
-                for (int i = 0; i < q.Answers.Count; i++)
+                <br />
+                foreach (Question q in Model.Questions)
                 {
-                    string id = n + "a" + (i + 1);
+                    <h5>@q.TextQuestion</h5>
 
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id=@id name=@n value="@q.Answers.ToList()[i].Key" required>
-                    <label class="custom-control-label" for=@id>@q.Answers.ToList()[i].Key</label><br>
-                </div>
+                    string n = "q" + j;
+
+                    for (int i = 0; i < q.Answers.Count; i++)
+                    {
+                        string id = n + "a" + (i + 1);
+
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id=@id name=@n value="@q.Answers.ToList()[i].Key" required>
+                            <label class="custom-control-label" for=@id>@q.Answers.ToList()[i].Key</label><br>
+                        </div>
+                    }
+
+                    <br />
+                    j++;
                 }
 
-                j++;
+                <hr class="my-4">
+                <input type="submit" value="Koniec" class="btn btn-primary btn-sm">
             }
 
-            <input type="submit" value="Koniec">
-
-        }
-    </form>
+        </form>
+           
+    </div>
 
 
         <!--
@@ -66,6 +65,5 @@
         <input type="submit" value="Koniec">
     </form>-->
 
-    </div>
 
 

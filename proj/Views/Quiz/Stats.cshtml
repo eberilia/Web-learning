@@ -1,55 +1,91 @@
 ﻿@model proj.Models.Score
 @{
     ViewData["Title"] = "Home Page";
+
+    string mess030 = "Ups... Może następnym razem pójdzie lepiej?";
+    string mess3160 = "Nieźle, ale zawsze może być lepiej!";
+    string mess6190 = "Dobrze Ci poszło!";
+    string mess91100 = "GRATULACJE! Świetnie Ci poszło!";
 }
 
     <div>
-        <h2> GRATULACJE! Twoj wynik: </h2>
-        <h1> @Model.GetPercent() %</h1>
-        <h4>Czyli w sumie zdobyles @Model.GetPoints() na @Model.UserCorrectnessAnswers.Count punkty.</h4>
+        <div class="jumbotron">
+            <h2 class="display-4">
+                @{
+                    if (@Model.GetPercent() <= 30)
+                    {
+                        @mess030;
+                    }
+                    else if (@Model.GetPercent() > 30 && @Model.GetPercent() <= 60)
+                    {
+                        @mess3160;
+                    }
+                    else if (@Model.GetPercent() > 60 && @Model.GetPercent() <= 90)
+                    {
+                        @mess6190;
+                    }
+                    else
+                    {
+                        @mess91100;
+                    }
+                }
+            </h2>
+            <p class="lead">
+                <b>Twoj wynik: @Model.GetPercent() %</b>
+            </p>
+            <hr class="my-4">
+            <p>
+                W sumie zdobyles @Model.GetPoints() na @Model.UserCorrectnessAnswers.Count punkty.
+            </p>
+
+            <div class="accordion" id="odpowiedzi">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Twoje odpowiedzi
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#odpowiedzi">
+                        <div class="card-body">
+                            @{
+                                for (int i = 0; i < Model.UserCorrectnessAnswers.Count; i++)
+                                {
+                                    string n = "Q" + (i + 1);
+
+                                    if (Model.UserCorrectnessAnswers[i] == true)
+                                    {
+                                        <p>Pytanie @(i+1): @ViewData[n] <span style="color: green">DOBRZE</span></p>
+                                    }
+                                    else
+                                    {
+                                        <p>Pytanie @(i+1): @ViewData[n] <span style="color: red">ŹLE</span></p>
+                                    }
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" class="btn btn-primary btn-sm" />
+            <input id="TryAgain" onclick="location.href='@Url.Action("Quiz", "Quiz")'" type="button" value="Spróbuj jeszcze raz" class="btn btn-primary btn-sm" />
+
+        </div>
     </div>
 
-    <div>
-        @{ 
-            for(int i=0; i<Model.UserCorrectnessAnswers.Count; i++)
-            {
-                string n = "Q" + (i + 1);
-
-                <p>Pytanie @(i+1), Twoja odpowiedz: @ViewData[n]</p>
-
-                if(Model.UserCorrectnessAnswers[i] == true)
-                {
-                    <p> I jest to poprawna odpowiedz! </p>
-                }
-                else
-                { 
-                    <p>BLAD!</p>
-                }
-
-                <br />
-
-            }
-
-        }
-    </div>
         <!-- <p>Odp na pyt 1: @ViewData["Q1"]</p>
-       
-        if ( Model.UserCorrectnessAnswers[0] == true )
-            <p> Poprawna odpowiedz.</p>
-        else
-            <p> BLAD! </ p >
+
+    if ( Model.UserCorrectnessAnswers[0] == true )
+        <p> Poprawna odpowiedz.</p>
+    else
+        <p> BLAD! </ p >
+
+
+       <p>Odp na pyt 2: @ViewData["Q2"]</p>-->
 
     
-           <p>Odp na pyt 2: @ViewData["Q2"]</p>-->
-
-
-    
-
-<div>
-    <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" />
-</div>
-
-<div>
-    <input id="TryAgain" onclick="location.href='@Url.Action("Quiz", "Quiz")'" type="button" value="Spróbuj jeszcze raz" />
-</div>
-
