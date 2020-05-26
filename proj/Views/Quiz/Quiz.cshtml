@@ -11,6 +11,7 @@
                 <br />
                 foreach (Question q in Model.Questions)
                 {
+                    <h6><b>Pytanie @j</b></h6>
                     <h5>@q.TextQuestion</h5>
 
                     string n = "q" + j;
@@ -31,6 +32,7 @@
 
                 <hr class="my-4">
                 <input type="submit" value="Koniec" class="btn btn-primary btn-sm">
+                <input id="Return" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Powrót" class="btn btn-secondary btn-sm" />
             }
 
         </form>

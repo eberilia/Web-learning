@@ -2,14 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <div class="text-center">
-        <h1 class="display-4">Wybierz Quiz</h1>
-        <br />
-        
-        <form asp-action="Quiz">
-            <button type="submit" name="ID" value="1000" class="btn btn-primary btn-lg btn-block">Matematyka</button>
-            <button type="submit" name="ID" value="5656" class="btn btn-primary btn-lg btn-block">Przyroda</button>
-            <button type="submit" name="ID" value="1234" class="btn btn-primary btn-lg btn-block">Język angielski</button>
-        </form>
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1 class="display-4">Wybierz quiz</h1>
+            <br />
+        </div>
+            <form asp-action="Quiz">
+                <button type="submit" name="ID" value="1000" class="btn btn-primary btn-lg btn-block">Matematyka</button>
+                <button type="submit" name="ID" value="5656" class="btn btn-primary btn-lg btn-block">Przyroda</button>
+                <button type="submit" name="ID" value="1234" class="btn btn-primary btn-lg btn-block">Język angielski</button>
+            </form>
+            <hr class="my-4">
+            <input id="Start" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Wróć do strony głównej" class="btn btn-secondary btn-sm" />
+        </div>
 
-    </div>
