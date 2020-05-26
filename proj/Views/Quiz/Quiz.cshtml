@@ -2,7 +2,12 @@
 @{
 }
 
+   
+
     <div class="jumbotron">
+        <input id="Return" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Powrót" class="btn btn-secondary btn-sm float-right" />
+
+
         <form asp-action="Stats" asp-route-id="@Model.IdQuiz" method="post">
             <h1 class="display-4">QUIZ O ID: @ViewData["ID"]</h1>
             @{
@@ -31,41 +36,38 @@
                 }
 
                 <hr class="my-4">
-                <input type="submit" value="Koniec" class="btn btn-primary btn-sm">
-                <input id="Return" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Powrót" class="btn btn-secondary btn-sm" />
+                <input type="submit" value="Koniec" class="btn btn-primary btn-block">
+
             }
 
         </form>
-           
+
     </div>
 
 
-        <!--
+<!--
 
-    <br />
-    <h4>STATYCZNY QUIZ - OLD VERSION</h4>
-    <form asp-action="Stats">
-        <p>Ile bokow ma kwadrat</p>
-        <input type="radio" id="q1id1" name="q1" value="2">
-        <label for="q1id1">2</label><br>
-        <input type="radio" id="q1id2" name="q1" value="3">
-        <label for="q1id2">3</label><br>
-        <input type="radio" id="q1id3" name="q1" value="4">
-        <label for="q1id3">4</label>
+<br />
+<h4>STATYCZNY QUIZ - OLD VERSION</h4>
+<form asp-action="Stats">
+    <p>Ile bokow ma kwadrat</p>
+    <input type="radio" id="q1id1" name="q1" value="2">
+    <label for="q1id1">2</label><br>
+    <input type="radio" id="q1id2" name="q1" value="3">
+    <label for="q1id2">3</label><br>
+    <input type="radio" id="q1id3" name="q1" value="4">
+    <label for="q1id3">4</label>
 
-        <br>
-        <br>
+    <br>
+    <br>
 
-        <p>Cos0 to....?</p>
-        <input type="radio" id="q2id1" name="q2" value="(pierwiastek z 2)/2">
-        <label for="q2id1">(pierwiastek z 2)/2</label><br>
-        <input type="radio" id="q2id2" name="q2" value="0">
-        <label for="q2id2">0</label><br>
-        <input type="radio" id="q2id3" name="q2" value="1">
-        <label for="q2id3">1</label><br><br>
+    <p>Cos0 to....?</p>
+    <input type="radio" id="q2id1" name="q2" value="(pierwiastek z 2)/2">
+    <label for="q2id1">(pierwiastek z 2)/2</label><br>
+    <input type="radio" id="q2id2" name="q2" value="0">
+    <label for="q2id2">0</label><br>
+    <input type="radio" id="q2id3" name="q2" value="1">
+    <label for="q2id3">1</label><br><br>
 
-        <input type="submit" value="Koniec">
-    </form>-->
-
-
-
+    <input type="submit" value="Koniec">
+</form>-->
