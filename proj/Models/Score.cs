@@ -8,6 +8,7 @@ namespace proj.Models
 {
     public class Score
     {
+
         public List<bool> UserCorrectnessAnswers { get; set; }
 
         public Score()

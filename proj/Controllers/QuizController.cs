@@ -51,13 +51,35 @@ namespace proj.Controllers
 
             q.Questions.Add(y);
 
+            Question z = new Question();
+
+            z.TextQuestion = "Bblablbalblbblablba?";
+
+            z.Answers.Add("Ababababa", true);
+            z.Answers.Add("Hababababbaba?", false);
+            z.Answers.Add("ablablblaabalaaaaaaaaaaaa", false);
+            z.Answers.Add("bla?", false);
+
+            q.Questions.Add(z);
+
             return View(q);
         }
 
-        public IActionResult Stats(string q1, string q2)
+        public IActionResult Stats()
         {
+
+            for(int i=0; i<Request.Form.ToList().Count - 1; i++)
+            {
+                string mess = "Q" + (i + 1);
+                string a = Request.Form.ToList()[i].Value;
+                ViewData[mess] = a;
+            }
+
+            /*string q1 = Request.Form.ToList()[0].Value;
+            string q2 = Request.Form.ToList()[1].Value;
+
             ViewData["Q1"] = q1;
-            ViewData["Q2"] = q2;
+            ViewData["Q2"] = q2;*/
 
 
             // string id quizu pobrane z formularza
@@ -67,9 +89,12 @@ namespace proj.Controllers
             // return view(sc)
             //
 
+            
             Score sc = new Score();
 
-            if(q1.Equals("90"))
+
+
+            if(Request.Form.ToList()[0].Value.Equals("90"))
             {
                 sc.UserCorrectnessAnswers.Add(true);
             }
@@ -78,7 +103,15 @@ namespace proj.Controllers
                 sc.UserCorrectnessAnswers.Add(false);
             }
 
-            if(q2.Equals("Czerwonego i bialego"))
+            if(Request.Form.ToList()[1].Value.Equals("Czerwonego i bialego"))
+            {
+                sc.UserCorrectnessAnswers.Add(true);
+            }
+            else
+            {
+                sc.UserCorrectnessAnswers.Add(false);
+            }
+            if(Request.Form.ToList()[2].Value.Equals("Hababababbaba?"))
             {
                 sc.UserCorrectnessAnswers.Add(true);
             }
