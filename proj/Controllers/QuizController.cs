@@ -17,6 +17,11 @@ namespace proj.Controllers
             return View();
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         public IActionResult Quiz(uint ID)
         {
             ViewData["ID"] = ID;
@@ -65,7 +70,7 @@ namespace proj.Controllers
             return View(q);
         }
 
-        public IActionResult Stats()
+        public IActionResult Stats(uint ID)
         {
 
             for(int i=0; i<Request.Form.ToList().Count - 1; i++)
@@ -91,7 +96,7 @@ namespace proj.Controllers
 
             
             Score sc = new Score();
-
+            sc.IdQuiz = ID;
 
 
             if(Request.Form.ToList()[0].Value.Equals("90"))

@@ -11,16 +11,9 @@ namespace proj.Models
         public string TextQuestion { get; set; }
         public Dictionary<string, bool> Answers;
 
-        //public List<string> TextAnswers { get; set; }
-        //public List<bool> Answers { get; set; }
-
         public Question()
         {
             Answers = new Dictionary<string, bool>();
-            //TextAnswers = new List<string>();
-            //Answers = new List<bool>();
-
-
         }
 
     }
