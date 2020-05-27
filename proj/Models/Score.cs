@@ -8,7 +8,7 @@ namespace proj.Models
 {
     public class Score
     {
-
+        public uint IdQuiz { get; set; }
         public List<bool> UserCorrectnessAnswers { get; set; }
 
         public Score()
