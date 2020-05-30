@@ -13,12 +13,6 @@ namespace proj.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUser _user;
-        /*private readonly IQuestion _question;
-
-        public QuizController(IQuestion question)
-        {
-            _question = question;
-        }*/
 
         public HomeController(ILogger<HomeController> logger, IUser user)
         {
@@ -36,8 +30,18 @@ namespace proj.Controllers
         public IActionResult CreateUser(User user)
         {
             _user.AddUser(user);
+            return RedirectToAction("Login");
+        }
+
+        public IActionResult Login()
+        {
+
+
             return View();
         }
+
+        
+        
 
         public IActionResult Index()
         {

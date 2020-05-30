@@ -11,6 +11,7 @@ namespace proj.Models
         IEnumerable<User> GetAllUsers();
         User AddUser(User user);
         User UpdateUser(User userChange);
+        User AddQuizToUser(User user, Quiz quiz);
         User DeteleUser(int id);
     }
 }
