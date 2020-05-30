@@ -12,10 +12,31 @@ namespace proj.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUser _user;
+        /*private readonly IQuestion _question;
 
-        public HomeController(ILogger<HomeController> logger)
+        public QuizController(IQuestion question)
+        {
+            _question = question;
+        }*/
+
+        public HomeController(ILogger<HomeController> logger, IUser user)
         {
             _logger = logger;
+            _user = user;
+        }
+
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateUser(User user)
+        {
+            _user.AddUser(user);
+            return View();
         }
 
         public IActionResult Index()

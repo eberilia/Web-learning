@@ -9,13 +9,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using proj.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace proj
 {
     public class Startup
     {
+        /* dodane */
+        private IConfiguration _config;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _config = configuration; //dodane
         }
 
         public IConfiguration Configuration { get; }
@@ -23,6 +30,15 @@ namespace proj
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /* dodane */
+            services.AddDbContextPool<AppDbContext>(options => options.UseMySql(_config.GetConnectionString("WeblearnDBConnection")));
+            services.AddMvc().AddXmlDataContractSerializerFormatters();
+            services.AddScoped<IQuestion, SQLQuestionRepository>();
+            services.AddScoped<IUser, SQLUserRepository>();
+            services.AddScoped<IQuiz, SQLQuizRepository>();
+
+
+
             services.AddControllersWithViews();
         }
 

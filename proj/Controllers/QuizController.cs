@@ -12,6 +12,18 @@ namespace proj.Controllers
 {
     public class QuizController : Controller
     {
+        /*private readonly IQuestion _question;
+
+        public QuizController(IQuestion question)
+        {
+            _question = question;
+        }*/
+
+        public IActionResult CreateQuestion()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -34,7 +46,7 @@ namespace proj.Controllers
             q.IdQuiz = ID;
             
             /* Tworzenie pytania */
-            Question x = new Question();
+            /*Question x = new Question();
        
             x.TextQuestion = "Ile stopni ma kat prosty?";
 
@@ -65,7 +77,7 @@ namespace proj.Controllers
             z.Answers.Add("ablablblaabalaaaaaaaaaaaa", false);
             z.Answers.Add("bla?", false);
 
-            q.Questions.Add(z);
+            q.Questions.Add(z);*/
 
             return View(q);
         }
@@ -99,7 +111,7 @@ namespace proj.Controllers
             sc.IdQuiz = ID;
 
 
-            if(Request.Form.ToList()[0].Value.Equals("90"))
+            /*if(Request.Form.ToList()[0].Value.Equals("90"))
             {
                 sc.UserCorrectnessAnswers.Add(true);
             }
@@ -124,7 +136,7 @@ namespace proj.Controllers
             {
                 sc.UserCorrectnessAnswers.Add(false);
             }
-
+            */
 
             return View(sc);
         }
