@@ -21,15 +21,32 @@ namespace proj.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateUser()
+        
+        public IActionResult CreateUser(string? errorMessage) 
         {
+            
+
+            ViewBag.errorMessage = errorMessage;
             return View();
         }
+
+
 
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-            _user.AddUser(user);
+            User u = _user.GetUser(user.Username);
+            
+            if (u == null)
+                _user.AddUser(user);
+            else
+            {
+                
+                return RedirectToAction("CreateUser", new { errorMessage = "Podana nazwa użytkownika już istnieje." });
+
+            }
+
+
             return RedirectToAction("Login");
         }
 
