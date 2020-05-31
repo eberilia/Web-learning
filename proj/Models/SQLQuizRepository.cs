@@ -36,7 +36,7 @@ namespace proj.Models
             return context.Quizes;
         }
 
-        public Quiz GetQuiz(int id)
+        public Quiz GetQuiz(uint id)
         {
             return context.Quizes.Find(id);
         }

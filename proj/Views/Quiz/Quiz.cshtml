@@ -2,7 +2,53 @@
 @{
 }
 
-   
+<div class="jumbotron">
+    <input id="Return" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Powrót" class="btn btn-secondary btn-sm float-right" />
+
+
+    <form asp-action="Stats" asp-route-id="@Model.IdQuiz" method="post">
+        <h1 class="display-4">QUIZ O ID: @ViewData["ID"]</h1>
+        @{
+            int j = 1;
+
+            <br />
+            foreach (Question q in Model.Questions)
+            {
+                <h6><b>Pytanie @j</b></h6>
+                <h5>@q.TextQuestion</h5>
+
+                string n = "q" + j;
+
+                string[] answers = { q.Answer1, q.Answer2, q.Answer3, q.Answer4, q.Answer5, q.Answer6, q.Answer7, q.Answer8 };
+
+                for (int i = 0; i < answers.Length; i++)
+                {
+
+                    string id = n + "a" + (i + 1);
+
+                    if (answers[i] == null)
+                        break;
+
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id=@id name=@n value="@answers[i]" required>
+                        <label class="custom-control-label" for=@id>@answers[i]</label><br>
+                    </div>
+                }
+
+
+
+                <br />
+                j++;
+            }
+
+            <hr class="my-4">
+            <input type="submit" value="Koniec" class="btn btn-primary btn-block">
+
+        }
+
+    </form>
+
+</div>
 
 
 

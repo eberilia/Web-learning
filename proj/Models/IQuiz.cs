@@ -7,7 +7,7 @@ namespace proj.Models
 {
     public interface IQuiz
     {
-        Quiz GetQuiz(int id);
+        Quiz GetQuiz(uint id);
         IEnumerable<Quiz> GetAllQuizes();
         Quiz AddQuiz(Quiz quiz);
         Quiz UpdateQuiz(Quiz quizChange);

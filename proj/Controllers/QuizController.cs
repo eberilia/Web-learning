@@ -12,12 +12,14 @@ namespace proj.Controllers
 {
     public class QuizController : Controller
     {
-        /*private readonly IQuestion _question;
+        private readonly IQuiz _quiz;
+        private readonly IQuestion _question;
 
-        public QuizController(IQuestion question)
+        public QuizController(IQuiz quiz, IQuestion question)
         {
+            _quiz = quiz;
             _question = question;
-        }*/
+        }
 
         public IActionResult CreateQuestion()
         {
@@ -26,7 +28,10 @@ namespace proj.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<Quiz> quizes = _quiz.GetAllQuizes().ToList();
+            ViewBag.quizes = quizes;
+
+            return View(quizes);
         }
 
         public IActionResult CreateQuiz()
@@ -38,47 +43,25 @@ namespace proj.Controllers
         {
             ViewData["ID"] = ID;
 
-             // TO DO - odszukaj quizu o id w bazie i stworz nowa zmienna Quiz o tych parametrach
-             //baza danych zwroc mi obiekt typu quiz o id takim
-             // quiz q = pobierz z bazy
+            // TO DO - odszukaj quizu o id w bazie i stworz nowa zmienna Quiz o tych parametrach
+            //baza danych zwroc mi obiekt typu quiz o id takim
+            // quiz q = pobierz z bazy
 
-            Quiz q = new Quiz();
-            q.IdQuiz = ID;
-            
-            /* Tworzenie pytania */
-            /*Question x = new Question();
-       
-            x.TextQuestion = "Ile stopni ma kat prosty?";
+            Quiz q = _quiz.GetQuiz(ID);
 
-            x.Answers.Add("60", false);
-            x.Answers.Add("120", false);
-            x.Answers.Add("90", true);
-          
-            q.Questions.Add(x);
+            List<Question> allQuestions = _question.GetAllQuestions().ToList();
+            List<Question> questions = new List<Question>();
+            for(int i=0; i<allQuestions.Count; i++)
+            {
+                if(allQuestions[i].IdQuizFK == ID)
+                {
+                    questions.Add(allQuestions[i]);
+                }
 
+            }
 
-            Question y = new Question();
-            
-            y.TextQuestion = "Kolor rozowy powstaje z polaczenia kolorow: ";
-
-            y.Answers.Add("Czerwonego i bialego", true);
-            y.Answers.Add("Zielonego i zoltego", false);
-            y.Answers.Add("Niebieskiego i czarnego", false);
-            y.Answers.Add("Pomaranczowego i czerwonego", false);
-
-            q.Questions.Add(y);
-
-            Question z = new Question();
-
-            z.TextQuestion = "Bblablbalblbblablba?";
-
-            z.Answers.Add("Ababababa", true);
-            z.Answers.Add("Hababababbaba?", false);
-            z.Answers.Add("ablablblaabalaaaaaaaaaaaa", false);
-            z.Answers.Add("bla?", false);
-
-            q.Questions.Add(z);*/
-
+            q.Questions = questions;
+   
             return View(q);
         }
 
@@ -104,39 +87,30 @@ namespace proj.Controllers
             // Score -> czytanie z bazy danych poprawnych odp
             // sc.generateScore([])
             // return view(sc)
-            //
 
-            
             Score sc = new Score();
             sc.IdQuiz = ID;
 
 
-            /*if(Request.Form.ToList()[0].Value.Equals("90"))
+            List<Question> allQuestions = _question.GetAllQuestions().ToList();
+            List<Question> questions = new List<Question>();
+            for (int i = 0; i < allQuestions.Count; i++)
             {
-                sc.UserCorrectnessAnswers.Add(true);
-            }
-            else
-            {
-                sc.UserCorrectnessAnswers.Add(false);
+                if (allQuestions[i].IdQuizFK == ID)
+                {
+                    questions.Add(allQuestions[i]);
+                }
+
             }
 
-            if(Request.Form.ToList()[1].Value.Equals("Czerwonego i bialego"))
+            for(int i = 0; i< Request.Form.ToList().Count - 1; i++)
             {
-                sc.UserCorrectnessAnswers.Add(true);
+                if ((Request.Form.ToList()[i].Value).Equals(questions[i]))
+                    sc.UserCorrectnessAnswers.Add(true);
+                else
+                    sc.UserCorrectnessAnswers.Add(false);
             }
-            else
-            {
-                sc.UserCorrectnessAnswers.Add(false);
-            }
-            if(Request.Form.ToList()[2].Value.Equals("Hababababbaba?"))
-            {
-                sc.UserCorrectnessAnswers.Add(true);
-            }
-            else
-            {
-                sc.UserCorrectnessAnswers.Add(false);
-            }
-            */
+
 
             return View(sc);
         }

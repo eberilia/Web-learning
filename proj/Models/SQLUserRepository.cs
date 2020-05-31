@@ -48,7 +48,7 @@ namespace proj.Models
             return context.Users.Find(username);
         }
 
-        
+
         public User UpdateUser(User userChange)
         {
             var u = context.Users.Attach(userChange);

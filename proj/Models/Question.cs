@@ -42,7 +42,7 @@ namespace proj.Models
 
         [Display(Name = "Prawidłowa?")]
         [DefaultValue(false)]
-        public bool Answer3Bool { get; set; }
+        public bool Answer3Bool { get; set; } = false;
 
         [Display(Name = "Odpowiedź 4")]
         public string Answer4 { get; set; }
