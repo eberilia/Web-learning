@@ -29,10 +29,9 @@ namespace proj.Models
       
         public ICollection<Question> Questions { get; set; }
 
-        [ForeignKey("IdUserFK")]
+        [ForeignKey("UsernameFK")]
         public User User { get; set; }
-        
-        public uint IdUserFK { get; set; }
+        public string UsernameFK { get; set; }
         
         
 

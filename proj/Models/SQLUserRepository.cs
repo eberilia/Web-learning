@@ -27,9 +27,9 @@ namespace proj.Models
             return user;
         }
 
-        public User DeteleUser(int id)
+        public User DeteleUser(string username)
         {
-            User u = context.Users.Find(id);
+            User u = context.Users.Find(username);
             if (u != null)
             {
                 context.Users.Remove(u);
@@ -43,11 +43,12 @@ namespace proj.Models
             return context.Users;
         }
 
-        public User GetUser(int id)
+        public User GetUser(string username)
         {
-            return context.Users.Find(id);
+            return context.Users.Find(username);
         }
 
+        
         public User UpdateUser(User userChange)
         {
             var u = context.Users.Attach(userChange);

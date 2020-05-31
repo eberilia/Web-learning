@@ -33,16 +33,42 @@ namespace proj.Controllers
             return RedirectToAction("Login");
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
-
-
             return View();
         }
 
-        
-        
+        [HttpPost]
+        public IActionResult Login(string username, string password)
+        {
 
+            User u = _user.GetUser(username);
+
+            if(u != null)
+            {
+                if(password.Equals(u.Password))
+                {
+                    proj.Models.DataStorage.CurrentlyLoggedInUsername = username;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewData["Error"] = "Nieprawidłowe hasło.";
+                }
+            }
+            else
+            {
+                ViewData["Error"] = "Nieprawidłowa nazwa użytkownika.";
+            }
+
+
+            return View();
+
+        
+        }
+
+        
         public IActionResult Index()
         {
             return View();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace proj.Migrations
 {
-    public partial class initialDataBase : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,15 +11,15 @@ namespace proj.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    IdUser = table.Column<uint>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Username = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
+                    ConfirmEmail = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    ConfirmPassword = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.IdUser);
+                    table.PrimaryKey("PK_Users", x => x.Username);
                 });
 
             migrationBuilder.CreateTable(
@@ -30,17 +30,17 @@ namespace proj.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     QuizName = table.Column<string>(nullable: false),
                     Category = table.Column<string>(nullable: true),
-                    IdUserFK = table.Column<uint>(nullable: false)
+                    UsernameFK = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Quizes", x => x.IdQuiz);
                     table.ForeignKey(
-                        name: "FK_Quizes_Users_IdUserFK",
-                        column: x => x.IdUserFK,
+                        name: "FK_Quizes_Users_UsernameFK",
+                        column: x => x.UsernameFK,
                         principalTable: "Users",
-                        principalColumn: "IdUser",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Username",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,9 +85,9 @@ namespace proj.Migrations
                 column: "IdQuizFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quizes_IdUserFK",
+                name: "IX_Quizes_UsernameFK",
                 table: "Quizes",
-                column: "IdUserFK");
+                column: "UsernameFK");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

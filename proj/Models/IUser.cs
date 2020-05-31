@@ -7,11 +7,11 @@ namespace proj.Models
 {
     public interface IUser
     {
-        User GetUser(int id);
+        User GetUser(string username);
         IEnumerable<User> GetAllUsers();
         User AddUser(User user);
         User UpdateUser(User userChange);
         User AddQuizToUser(User user, Quiz quiz);
-        User DeteleUser(int id);
+        User DeteleUser(string username);
     }
 }

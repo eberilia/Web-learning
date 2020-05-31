@@ -10,11 +10,10 @@ namespace proj.Models
 {
     public class User
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public uint IdUser { get; set; }
 
+        [Key]
         [Display(Name = "Nazwa użytkownika")]
+        [DataType(DataType.Text)]
         [Required(ErrorMessage = "Nazwa użytkownika jest wymagana.")]
         public string Username { get; set; }
 

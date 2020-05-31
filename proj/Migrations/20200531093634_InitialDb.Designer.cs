@@ -8,8 +8,8 @@ using proj.Models;
 namespace proj.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200530181750_user-update")]
-    partial class userupdate
+    [Migration("20200531093634_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,25 +97,24 @@ namespace proj.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<uint>("IdUserFK")
-                        .HasColumnType("int unsigned");
-
                     b.Property<string>("QuizName")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("UsernameFK")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
                     b.HasKey("IdQuiz");
 
-                    b.HasIndex("IdUserFK");
+                    b.HasIndex("UsernameFK");
 
                     b.ToTable("Quizes");
                 });
 
             modelBuilder.Entity("proj.Models.User", b =>
                 {
-                    b.Property<uint>("IdUser")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
+                    b.Property<string>("Username")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("ConfirmEmail")
                         .IsRequired()
@@ -133,11 +132,7 @@ namespace proj.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("IdUser");
+                    b.HasKey("Username");
 
                     b.ToTable("Users");
                 });
@@ -155,9 +150,7 @@ namespace proj.Migrations
                 {
                     b.HasOne("proj.Models.User", "User")
                         .WithMany("Quizes")
-                        .HasForeignKey("IdUserFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsernameFK");
                 });
 #pragma warning restore 612, 618
         }
