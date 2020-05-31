@@ -1,0 +1,29 @@
+﻿@model proj.Models.User
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">USERNAME</h1>
+    <hr class="my-4">
+
+    <div class="card" style="width: 1046px;">
+        <div class="card-header">
+            Moje Quizy
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-link">Nazwa quizu</button>
+                <p style="text-align: right; float: right">
+                    <input id="EditQuiz" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Edytuj" class="btn btn-secondary btn-sm" />
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <br /><br />
+    <input id="EditProfile" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Edytuj profil" class="btn btn-primary btn-sm" />
+    <input id="Start" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" class="btn btn-secondary btn-sm" />
+</div>
