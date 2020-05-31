@@ -29,7 +29,7 @@ namespace proj.Controllers
             return View();
         }
 
-        public IActionResult Create()
+        public IActionResult CreateQuiz()
         {
             return View();
         }

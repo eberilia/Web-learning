@@ -40,10 +40,8 @@ namespace proj.Controllers
             if (u == null)
                 _user.AddUser(user);
             else
-            {
-                
+            {    
                 return RedirectToAction("CreateUser", new { errorMessage = "Podana nazwa użytkownika już istnieje." });
-
             }
 
 
@@ -85,7 +83,26 @@ namespace proj.Controllers
         
         }
 
-        
+        public IActionResult Logout()
+        {
+
+            if(DataStorage.IsLoggedIn())
+            {
+                DataStorage.CurrentlyLoggedInUsername = "";
+            }
+
+
+            return RedirectToAction("Index");
+
+
+        }
+
+        public IActionResult MyProfile()
+        {
+            return View();
+        }
+
+
         public IActionResult Index()
         {
             return View();
