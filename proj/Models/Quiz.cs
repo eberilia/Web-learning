@@ -17,7 +17,7 @@ namespace proj.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public uint IdQuiz { get; set; }
 
-        [Display(Name = "Treść pytania")]
+        [Display(Name = "Nazwa quizu")]
         [Required(ErrorMessage = "Nazwa quizu jest wymagana.")]
         public string QuizName { get; set; }
 
