@@ -1,2 +1,11 @@
 proj/bin/Debug/*
 proj/obj/Debug/*
+proj/.vs/proj/DesignTimeBuild/.dtbcache.v2
+proj/.vs/proj/config/applicationhost.config
+proj/.vs/proj/v16/.suo
+proj/obj/proj.csproj.nuget.dgspec.json
+proj/obj/proj.csproj.nuget.g.props
+proj/obj/project.assets.json
+proj/obj/project.nuget.cache
+proj/proj.csproj
+proj/proj.csproj.user
