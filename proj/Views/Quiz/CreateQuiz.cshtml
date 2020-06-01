@@ -7,51 +7,50 @@
 @if (DataStorage.IsLoggedIn())
 {
 
-    <h1>CreateQuiz</h1>
+    <h1>Stwórz Quiz</h1>
 
     <h4>Quiz</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="CreateQuiz">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="CreateQuiz" method="post">
                 <div class="form-group">
-                    <label asp-for="QuizName" class="control-label"></label>
-                    <input asp-for="QuizName" class="form-control" />
-                    <span asp-validation-for="QuizName" class="text-danger"></span>
+                    <label for="quizname" class="control-label">Nazwa quizu</label>
+                    <input type="text" id="quizname" name="quizname" class="form-control" value="" placeholder="Nazwa Twojego quizu" />
+                    <span asp-validation-for="@Model.QuizName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Category" class="control-label"></label>
-                    <select asp-for="Category" id="categories" name="category">
-                        
-                        <option value="" >Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="fiat">Fiat</option>
-                        <option value="audi">Audi</option>
+                    <label for="category" class="control-label"></label>
+                    <select id="category" name="category">
+                        @for (int i = 0; i < Category.CATEGORIES.Length - 1; i++)
+                        {
+                            <option value=@Category.CATEGORIES[i]>@Category.CATEGORIES[i]</option>
+                        }
+                        <option selected value=@Category.CATEGORIES[Category.CATEGORIES.Length - 1]>@Category.CATEGORIES[Category.CATEGORIES.Length - 1]</option>
                     </select>
-
-                    <label asp-for="Category" class="control-label"></label>
-                    <input asp-for="Category" class="form-control" />
                     <span asp-validation-for="Category" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
-                    <label asp-for="UsernameFK" class="control-label"></label>
-                    <select asp-for="UsernameFK" class="form-control" asp-items="ViewBag.UsernameFK"></select>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="STWÓRZ" class="btn btn-primary" />
+                    <input type="submit" name="submit" value="STWÓRZ" class="btn btn-primary" />
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Dodaj następne pytanie" class="btn btn-primary" />
+                    <input type="submit" name="submit" value="Dodaj następne pytanie" class="btn btn-primary" />
                 </div>
+
             </form>
         </div>
     </div>
 
+
+
     <div>
         <a asp-action="Index">Back to List</a>
     </div>
+
+
+
 }
 else
 {

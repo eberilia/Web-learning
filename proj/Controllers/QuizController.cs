@@ -21,10 +21,7 @@ namespace proj.Controllers
             _question = question;
         }
 
-        public IActionResult CreateQuestion()
-        {
-            return View();
-        }
+       
 
         public IActionResult Index()
         {
@@ -34,18 +31,37 @@ namespace proj.Controllers
             return View(quizes);
         }
 
+        public IActionResult AddQuestion()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult CreateQuiz()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult CreateQuiz(string submit, string quizname, string category)
+        {
+            Quiz q = new Quiz();
+            q.QuizName = quizname;
+            q.Category = category;
+
+            q.UsernameFK = DataStorage.CurrentlyLoggedInUsername;
+
+            _quiz.AddQuiz(q);
+
+            if (submit.Equals("Dodaj następne pytanie"))
+                return RedirectToAction("AddQuestion");
+            else
+                return RedirectToAction("Index");
         }
 
         public IActionResult Quiz(uint ID)
         {
             ViewData["ID"] = ID;
 
-            // TO DO - odszukaj quizu o id w bazie i stworz nowa zmienna Quiz o tych parametrach
-            //baza danych zwroc mi obiekt typu quiz o id takim
-            // quiz q = pobierz z bazy
 
             Quiz q = _quiz.GetQuiz(ID);
 
@@ -81,23 +97,6 @@ namespace proj.Controllers
                 sc.UserAnswers.Add(a);
             }
 
-            
-
-            /*string q1 = Request.Form.ToList()[0].Value;
-            string q2 = Request.Form.ToList()[1].Value;
-
-            ViewData["Q1"] = q1;
-            ViewData["Q2"] = q2;*/
-
-
-            // string id quizu pobrane z formularza
-            // Score sc = new Score(String ID formularza);
-            // Score -> czytanie z bazy danych poprawnych odp
-            // sc.generateScore([])
-            // return view(sc)
-
-            
-
 
             List<Question> allQuestions = _question.GetAllQuestions().ToList();
             List<Question> questions = new List<Question>();
@@ -120,13 +119,6 @@ namespace proj.Controllers
             return View(sc);
         }
 
-           
-
-
-            
-        
-
-        
-
+          
     }
 }
