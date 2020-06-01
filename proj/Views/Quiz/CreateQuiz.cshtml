@@ -4,36 +4,64 @@
     ViewData["Title"] = "CreateQuiz";
 }
 
-<h1>CreateQuiz</h1>
+@if (DataStorage.IsLoggedIn())
+{
 
-<h4>Quiz</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateQuiz">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="QuizName" class="control-label"></label>
-                <input asp-for="QuizName" class="form-control" />
-                <span asp-validation-for="QuizName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsernameFK" class="control-label"></label>
-                <select asp-for="UsernameFK" class ="form-control" asp-items="ViewBag.UsernameFK"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <h1>CreateQuiz</h1>
+
+    <h4>Quiz</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateQuiz">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="QuizName" class="control-label"></label>
+                    <input asp-for="QuizName" class="form-control" />
+                    <span asp-validation-for="QuizName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label"></label>
+                    <select asp-for="Category" id="categories" name="category">
+                        
+                        <option value="" >Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="fiat">Fiat</option>
+                        <option value="audi">Audi</option>
+                    </select>
+
+                    <label asp-for="Category" class="control-label"></label>
+                    <input asp-for="Category" class="form-control" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UsernameFK" class="control-label"></label>
+                    <select asp-for="UsernameFK" class="form-control" asp-items="ViewBag.UsernameFK"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="STWÓRZ" class="btn btn-primary" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Dodaj następne pytanie" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
+else
+{
+    <div>
+        <input id="signin" onclick="location.href='@Url.Action("Login", "Home")'" type="button" value="Zaloguj się" />
+
+        <h6>Nie masz konta? Zarejestruj się:</h6>
+        <input id="signup" onclick="location.href='@Url.Action("CreateUser", "Home")'" type="button" value="Zarejestruj się" />
+    </div>
+}
+
+
 

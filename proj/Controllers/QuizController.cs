@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+//using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Controller;
 using proj.Models;
 
 
@@ -68,12 +68,20 @@ namespace proj.Controllers
         public IActionResult Stats(uint ID)
         {
 
-            for(int i=0; i<Request.Form.ToList().Count - 1; i++)
+            Score sc = new Score();
+            sc.IdQuiz = ID;
+
+            Quiz q = _quiz.GetQuiz(ID);
+
+            for (int i=0; i<Request.Form.ToList().Count - 1; i++)
             {
                 string mess = "Q" + (i + 1);
                 string a = Request.Form.ToList()[i].Value;
                 ViewData[mess] = a;
+                sc.UserAnswers.Add(a);
             }
+
+            
 
             /*string q1 = Request.Form.ToList()[0].Value;
             string q2 = Request.Form.ToList()[1].Value;
@@ -88,8 +96,7 @@ namespace proj.Controllers
             // sc.generateScore([])
             // return view(sc)
 
-            Score sc = new Score();
-            sc.IdQuiz = ID;
+            
 
 
             List<Question> allQuestions = _question.GetAllQuestions().ToList();
@@ -103,17 +110,21 @@ namespace proj.Controllers
 
             }
 
-            for(int i = 0; i< Request.Form.ToList().Count - 1; i++)
-            {
-                if ((Request.Form.ToList()[i].Value).Equals(questions[i]))
-                    sc.UserCorrectnessAnswers.Add(true);
-                else
-                    sc.UserCorrectnessAnswers.Add(false);
-            }
+            q.Questions = questions;
+            sc.Questions = questions;
+
+            
+            sc.CheckAnswers();
 
 
             return View(sc);
         }
+
+           
+
+
+            
+        
 
         
 

@@ -37,7 +37,6 @@
             <hr class="my-4">
 
 
-
             @{
                 for (int i = 0; i < Model.UserCorrectnessAnswers.Count; i++)
                 {
@@ -45,7 +44,8 @@
                     string collapsenumber = "collapse" + n;
                     string headingnumber = "heading" + n;
                     string youranswer = "Twoja odpowiedź: " + ViewData[n];
-                    string correctanswer = "Poprawna odpowiedź: ";
+                    string correctanswer = "Poprawna odpowiedź: " + Model.CorrectAnswers[i];
+                    string question = "Pytanie " + (i + 1) + ": " + Model.Questions[i].TextQuestion;
 
                     if (Model.UserCorrectnessAnswers[i] == true)
                     {
@@ -54,7 +54,7 @@
                                 <div class="card-header" id="@headingnumber">
                                     <h2 class="mb-0">
                                         <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#@collapsenumber" aria-expanded="false" aria-controls="@collapsenumber">
-                                            <span style="color: black">Pytanie @(i + 1)</span> <span style="color: green">DOBRZE</span>
+                                            <span style="color: black">@question</span> <span style="color: green">DOBRZE</span>
                                         </button>
                                     </h2>
                                 </div>
@@ -73,7 +73,7 @@
                                 <div class="card-header" id="@headingnumber">
                                     <h2 class="mb-0">
                                         <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#@collapsenumber" aria-expanded="false" aria-controls="@collapsenumber">
-                                            <span style="color: black">Pytanie @(i + 1)</span> <span style="color: red">ŹLE</span>
+                                            <span style="color: black">@question</span> <span style="color: red">ŹLE</span>
                                         </button>
                                     </h2>
                                 </div>
@@ -90,10 +90,11 @@
                 }
             }
 
+
             <br />
             <form asp-action="Quiz">
                 <button type="submit" name="ID" value=@Model.IdQuiz class="btn btn-primary btn-sm">Spróbuj jeszcze raz</button>
-            </form>   
+            </form>
             <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" class="btn btn-secondary btn-sm" />
 
         </div>

@@ -15,6 +15,15 @@ namespace proj.Models
         public const string TECHNIKA = "Technika";
         public const string INNE = "Inne";
 
+        /*public const List<const string> CATEGORIES = new List<string>()
+        {   
+            SWIAT, 
+            ZWIERZETA 
+        
+        };*/
+    
+            
+
       
             
     }
