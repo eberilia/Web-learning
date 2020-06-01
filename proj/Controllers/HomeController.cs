@@ -14,10 +14,16 @@ namespace proj.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUser _user;
 
-        public HomeController(ILogger<HomeController> logger, IUser user)
+        private readonly IQuiz _quiz;
+        private readonly IQuestion _question;
+
+        public HomeController(ILogger<HomeController> logger, IUser user, IQuiz quiz, IQuestion question)
         {
             _logger = logger;
             _user = user;
+
+            _quiz = quiz;
+            _question = question;
         }
 
         [HttpGet]
@@ -99,7 +105,25 @@ namespace proj.Controllers
 
         public IActionResult MyProfile()
         {
-            return View();
+            List<Quiz> wszystkieQuizy = new List<Quiz>();
+            wszystkieQuizy = _quiz.GetAllQuizes().ToList();
+
+            List<Quiz> quizyUzytkownika = new List<Quiz>();
+
+            for(int i=0; i<wszystkieQuizy.Count; i++)
+            {
+                if(wszystkieQuizy[i].UsernameFK == DataStorage.CurrentlyLoggedInUsername)
+                {
+                    quizyUzytkownika.Add(wszystkieQuizy[i]);
+                }
+            }
+
+            User exampleUser = new User();
+            exampleUser = _user.GetUser(DataStorage.CurrentlyLoggedInUsername);
+            exampleUser.Quizes = quizyUzytkownika;
+
+
+            return View(exampleUser);
         }
 
 

@@ -5,25 +5,32 @@
 @{
 }
 
-<div class="jumbotron">
-    <h1 class="display-4">USERNAME</h1>
-    <hr class="my-4">
+    <div class="jumbotron">
+        <h1 class="display-4">@DataStorage.CurrentlyLoggedInUsername</h1>
+        <br />
 
-    <div class="card" style="width: 1046px;">
-        <div class="card-header">
-            Moje Quizy
+        <div class="card" style="width: 1046px;">
+            <div class="card-header">
+                Moje Quizy
+            </div>
+            <ul class="list-group list-group-flush">
+                @for (int i = 0; i < Model.Quizes.Count(); i++)
+                {
+                    <li class="list-group-item">
+
+                        <form asp-controller="Quiz" asp-action="Quiz">
+                            <button type="submit" name="ID" value=@Model.Quizes.ToList()[i].IdQuiz class="btn btn-link">@Model.Quizes.ToList()[i].QuizName</button>
+
+                            <p style="float: right; text-align: right">
+                                <input id="EditQuiz" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Edytuj" class="btn btn-secondary btn-sm" />
+                            </p>
+                        </form>
+                    </li>
+                }
+            </ul>
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <button type="button" class="btn btn-link">Nazwa quizu</button>
-                <p style="text-align: right; float: right">
-                    <input id="EditQuiz" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Edytuj" class="btn btn-secondary btn-sm" />
-                </p>
-            </li>
-        </ul>
-    </div>
 
-    <br /><br />
-    <input id="EditProfile" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Edytuj profil" class="btn btn-primary btn-sm" />
-    <input id="Start" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" class="btn btn-secondary btn-sm" />
-</div>
+        <hr class="my-4">
+        <input id="EditProfile" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Edytuj profil" class="btn btn-primary btn-sm" />
+        <input id="Start" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" class="btn btn-secondary btn-sm" />
+    </div>
