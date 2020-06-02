@@ -11,98 +11,44 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddQuestion">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="TextQuestion" class="control-label"></label>
-                <input asp-for="TextQuestion" class="form-control" />
-                <span asp-validation-for="TextQuestion" class="text-danger"></span>
+                <label for="q1" class="control-label">Pytanie :</label>
+                <input type="text" id="q" name="q" class="form-control" value="" placeholder="Treść pytania" required />
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Answer1" class="control-label"></label>
-                <input asp-for="Answer1" class="form-control" />
-                <span asp-validation-for="Answer1" class="text-danger"></span>
+                <label for="qa1" class="control-label">Treść odpowiedzi</label>
+                <input type="text" id="qa1" name="qa1" class="form-control" value="" placeholder="Treść odpowiedzi" required />
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Answer1Bool" /> @Html.DisplayNameFor(model => model.Answer1Bool)
-                </label>
+                <input type="checkbox" class="form-check-input" id="qa1bool" name="qa1bool" value="1" />
+                <label for="qa1bool" class="form-check-label">Prawidłowa?</label>
+
             </div>
+
             <div class="form-group">
-                <label asp-for="Answer2" class="control-label"></label>
-                <input asp-for="Answer2" class="form-control" />
-                <span asp-validation-for="Answer2" class="text-danger"></span>
+                <label for="qa2" class="control-label">Treść odpowiedzi</label>
+                <input type="text" id="qa2" name="qa2" class="form-control" value="" placeholder="Treść odpowiedzi" required />
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Answer2Bool" /> @Html.DisplayNameFor(model => model.Answer2Bool)
-                </label>
+                <input type="checkbox" class="form-check-input" id="qa2bool" name="qa2bool" value="1" />
+                <label for="qa2bool" class="form-check-label">Prawidłowa?</label>
             </div>
+
+
+            <div id="additional_answer">
+                <button id="add_answer" class="btn btn-primary">Dodaj kolejną odpowiedź</button>
+            </div>
+
+
+
+
             <div class="form-group">
-                <label asp-for="Answer3" class="control-label"></label>
-                <input asp-for="Answer3" class="form-control" />
-                <span asp-validation-for="Answer3" class="text-danger"></span>
+                <input type="submit" name="submit" value="Dodaj następne pytanie" class="btn btn-primary" />
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Answer3Bool" /> @Html.DisplayNameFor(model => model.Answer3Bool)
-                </label>
-            </div>
+
             <div class="form-group">
-                <label asp-for="Answer4" class="control-label"></label>
-                <input asp-for="Answer4" class="form-control" />
-                <span asp-validation-for="Answer4" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Answer4Bool" /> @Html.DisplayNameFor(model => model.Answer4Bool)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Answer5" class="control-label"></label>
-                <input asp-for="Answer5" class="form-control" />
-                <span asp-validation-for="Answer5" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Answer5Bool" /> @Html.DisplayNameFor(model => model.Answer5Bool)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Answer6" class="control-label"></label>
-                <input asp-for="Answer6" class="form-control" />
-                <span asp-validation-for="Answer6" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Answer6Bool" /> @Html.DisplayNameFor(model => model.Answer6Bool)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Answer7" class="control-label"></label>
-                <input asp-for="Answer7" class="form-control" />
-                <span asp-validation-for="Answer7" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Answer7Bool" /> @Html.DisplayNameFor(model => model.Answer7Bool)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Answer8" class="control-label"></label>
-                <input asp-for="Answer8" class="form-control" />
-                <span asp-validation-for="Answer8" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Answer8Bool" /> @Html.DisplayNameFor(model => model.Answer8Bool)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdQuizFK" class="control-label"></label>
-                <select asp-for="IdQuizFK" class ="form-control" asp-items="ViewBag.IdQuizFK"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" name="submit" value="STWÓRZ" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -18,7 +18,7 @@ $(document).ready(function () {
                 $(add_button).addClass("disabled");
                 console.log('You Reached the limits')
             }
-            var id = 'q' + (x + 2)
+            var id = 'qa' + (x + 2)
             var id_b = id+'bool'
             var text = ''
             text += '<div class="form-group">'

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -33,9 +34,86 @@ namespace proj.Controllers
             return View(quizes);
         }
 
+        [HttpGet]
         public IActionResult AddQuestion()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddQuestion(string submit, string q, string qa1, string qa1bool, string qa2, string qa2bool,
+            string qa3, string qa3bool, string qa4, string qa4bool,
+            string qa5, string qa5bool, string qa6, string qa6bool,
+            string qa7, string qa7bool, string qa8, string qa8bool)
+        {
+
+
+            Question question = new Question();
+            question.TextQuestion = q;
+            question.IdQuizFK = DataStorage.ActualIdQuiz;
+
+            question.Answer1 = qa1;
+            question.Answer2 = qa2;
+
+            if (qa3 != null) question.Answer3 = qa3;
+            if (qa4 != null) question.Answer4 = qa4;
+            if (qa5 != null) question.Answer5 = qa5;
+            if (qa6 != null) question.Answer6 = qa6;
+            if (qa7 != null) question.Answer7 = qa7;
+            if (qa8 != null) question.Answer8 = qa8;
+
+            if (qa1bool != null)
+                question.Answer1Bool = true;
+            else
+                question.Answer1Bool = false;
+
+            if (qa2bool != null)
+                question.Answer2Bool = true;
+            else
+                question.Answer2Bool = false;
+
+            if (qa3bool != null)
+                question.Answer3Bool = true;
+            else
+                question.Answer3Bool = false;
+
+            if (qa4bool != null)
+                question.Answer4Bool = true;
+            else
+                question.Answer4Bool = false;
+
+            if (qa5bool != null)
+                question.Answer5Bool = true;
+            else
+                question.Answer5Bool = false;
+
+            if (qa6bool != null)
+                question.Answer6Bool = true;
+            else
+                question.Answer6Bool = false;
+
+            if (qa7bool != null)
+                question.Answer7Bool = true;
+            else
+                question.Answer7Bool = false;
+
+            if (qa8bool != null)
+                question.Answer8Bool = true;
+            else
+                question.Answer8Bool = false;
+
+
+            _question.AddQuestion(question);
+
+
+            if (submit.Equals("Dodaj następne pytanie"))
+                return View();
+            else
+            {
+                DataStorage.ActualIdQuiz = 0;
+                return RedirectToAction("Index");
+            }
+
         }
 
         [HttpGet]
@@ -45,14 +123,12 @@ namespace proj.Controllers
         }
         [HttpPost]
         public IActionResult CreateQuiz(string submit, string quizname, string category,
-            string q, string qa1, string qa1bool, string qa2, string qa2bool)
+            string q, string qa1, string qa1bool, string qa2, string qa2bool,
+            string qa3, string qa3bool, string qa4, string qa4bool,
+            string qa5, string qa5bool, string qa6, string qa6bool,
+            string qa7, string qa7bool, string qa8, string qa8bool)
         {
-            for (int i = 0; i < Request.Form.ToList().Count - 1; i++)
-            {
-                string mess = "Q" + (i + 1);
-                string a = Request.Form.ToList()[i].Value;
-                ViewData[mess] = a;
-            }
+           
 
             Quiz quiz = new Quiz();
             quiz.QuizName = quizname;
@@ -63,42 +139,77 @@ namespace proj.Controllers
 
 
             /* jakie Id ma nowy quiz? */
+            /* to do - pobranie ostatniego quizu UZYTKOWNIKA a nie z calej listy!*/
             List<Quiz> allQuizes = new List<Quiz>();
             allQuizes = _quiz.GetAllQuizes().ToList();
-            uint idNewQuiz = allQuizes[allQuizes.Count - 1].IdQuiz;
+            DataStorage.ActualIdQuiz = allQuizes[allQuizes.Count - 1].IdQuiz;
 
 
             Question question = new Question();
             question.TextQuestion = q;
-            question.IdQuizFK = idNewQuiz;
+            question.IdQuizFK = DataStorage.ActualIdQuiz;
 
             question.Answer1 = qa1;
+            question.Answer2 = qa2;
+
+            if (qa3 != null) question.Answer3 = qa3;
+            if (qa4 != null) question.Answer4 = qa4;
+            if (qa5 != null) question.Answer5 = qa5;
+            if (qa6 != null) question.Answer6 = qa6;
+            if (qa7 != null) question.Answer7 = qa7;
+            if (qa8 != null) question.Answer8 = qa8;
 
             if (qa1bool != null)
                 question.Answer1Bool = true;
             else
                 question.Answer1Bool = false;
 
-            question.Answer2 = qa2;
-
             if (qa2bool != null)
                 question.Answer2Bool = true;
             else
                 question.Answer2Bool = false;
 
-            question.Answer3Bool = false;
-            question.Answer4Bool = false;
-            question.Answer5Bool = false;
-            question.Answer6Bool = false;
-            question.Answer7Bool = false;
-            question.Answer8Bool = false;
+            if (qa3bool != null)
+                question.Answer3Bool = true;
+            else
+                question.Answer3Bool = false;
 
+            if (qa4bool != null)
+                question.Answer4Bool = true;
+            else
+                question.Answer4Bool = false;
+
+            if (qa5bool != null)
+                question.Answer5Bool = true;
+            else
+                question.Answer5Bool = false;
+
+            if (qa6bool != null)
+                question.Answer6Bool = true;
+            else
+                question.Answer6Bool = false;
+
+            if (qa7bool != null)
+                question.Answer7Bool = true;
+            else
+                question.Answer7Bool = false;
+
+            if (qa8bool != null)
+                question.Answer8Bool = true;
+            else
+                question.Answer8Bool = false;
+
+           
             _question.AddQuestion(question);
 
             if (submit.Equals("Dodaj następne pytanie"))
                 return RedirectToAction("AddQuestion");
             else
+            {
+                DataStorage.ActualIdQuiz = 0;
                 return RedirectToAction("Index");
+            }
+                
         }
 
         public IActionResult Quiz(uint ID)
