@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using proj.Models;
@@ -122,8 +123,9 @@ namespace proj.Controllers
             exampleUser = _user.GetUser(DataStorage.CurrentlyLoggedInUsername);
             exampleUser.Quizes = quizyUzytkownika;
 
-
             return View(exampleUser);
+
+
         }
 
 

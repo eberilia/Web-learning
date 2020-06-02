@@ -12,5 +12,7 @@ namespace proj.Models
         Quiz AddQuiz(Quiz quiz);
         Quiz UpdateQuiz(Quiz quizChange);
         Quiz DeteleQuiz(int id);
+
+        Quiz AddQuestionToQuiz(Quiz quiz, Question question);
     }
 }

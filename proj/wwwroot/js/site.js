@@ -5,9 +5,9 @@
 
 $(document).ready(function () {
     var max_fields = 6;
-    var pytId = "q1";
     var div = $("#additional_answer");
     var add_button = $("#add_answer");
+    var prefix="q"
 
     var x = 0;
     $(add_button).click(function (e) {
@@ -18,18 +18,20 @@ $(document).ready(function () {
                 $(add_button).addClass("disabled");
                 console.log('You Reached the limits')
             }
-
+            var id = q + (x + 2)
+            var id_b = id+"bool"
             var text = ""
             text += '<div class="form-group">'
+            text += '<label for="' + id + '" class="control-label">Treść odpowiedzi</label>'
+            text += '<input type="text" id="' + id + '" name="' + id + '" class="form-control" value="" placeholder="Treść odpowiedzi" required />'
+            text += '<input type="checkbox" class="form-check-input" id="' + id_b + '" name="' + id_b + '"value="true" />'
+            text += '<label for="' + id_b + '" class="form-check-label">Prawidłowa?</label>' 
             text += '<a href = "#" class="delete" >Usuń</a>'
-            text += '<label for="q1a2" class="control-label">Treść odpowiedzi</label>'
-            text += '<input type="text" id="q1a2" name="q1a2" class="form-control" value="" placeholder="Treść odpowiedzi" required />'
-            text += '<input type="checkbox" class="form-check-input" id="q1a2bool" value="true" />'
-            text += '<label for="q1a2bool" class="form-check-label">Prawidłowa?</label>' 
             text += '</div>'
 
                 
             $(div).prepend(text);
+            //$(div).append(text);
 
 
             //$(div).append('<div><input type="text" name="mytext[]" /><a href="#" class="delete">Delete</a></div>'); //add input box

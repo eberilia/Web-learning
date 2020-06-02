@@ -58,6 +58,8 @@ namespace proj.Models
         {
             GetCorrectAnswersFromQuestions();
 
+            
+
             for(int i=0; i<UserAnswers.Count; i++)
             {
                 if (UserAnswers[i].Equals(CorrectAnswers[i]))

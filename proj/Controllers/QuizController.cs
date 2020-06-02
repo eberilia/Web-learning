@@ -14,11 +14,13 @@ namespace proj.Controllers
     {
         private readonly IQuiz _quiz;
         private readonly IQuestion _question;
+        private readonly IUser _user;
 
-        public QuizController(IQuiz quiz, IQuestion question)
+        public QuizController(IQuiz quiz, IQuestion question, IUser user)
         {
             _quiz = quiz;
             _question = question;
+            _user = user;
         }
 
        
@@ -42,15 +44,49 @@ namespace proj.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateQuiz(string submit, string quizname, string category, Quiz quiz)
+        public IActionResult CreateQuiz(string submit, string quizname, string category,
+            string q, string qa1, string qa1bool, string qa2, string qa2bool)
         {
-            Quiz q = new Quiz();
-            q.QuizName = quizname;
-            q.Category = category;
+            Quiz quiz = new Quiz();
+            quiz.QuizName = quizname;
+            quiz.Category = category;
 
-            q.UsernameFK = DataStorage.CurrentlyLoggedInUsername;
+            quiz.UsernameFK = DataStorage.CurrentlyLoggedInUsername;
+            _quiz.AddQuiz(quiz);
 
-            _quiz.AddQuiz(q);
+
+            /* jakie Id ma nowy quiz? */
+            List<Quiz> allQuizes = new List<Quiz>();
+            allQuizes = _quiz.GetAllQuizes().ToList();
+            uint idNewQuiz = allQuizes[allQuizes.Count - 1].IdQuiz;
+
+
+            Question question = new Question();
+            question.TextQuestion = q;
+            question.IdQuizFK = idNewQuiz;
+
+            question.Answer1 = qa1;
+
+            if (qa1bool != null)
+                question.Answer1Bool = true;
+            else
+                question.Answer1Bool = false;
+
+            question.Answer2 = qa2;
+
+            if (qa2bool != null)
+                question.Answer2Bool = true;
+            else
+                question.Answer2Bool = false;
+
+            question.Answer3Bool = false;
+            question.Answer4Bool = false;
+            question.Answer5Bool = false;
+            question.Answer6Bool = false;
+            question.Answer7Bool = false;
+            question.Answer8Bool = false;
+
+            _question.AddQuestion(question);
 
             if (submit.Equals("Dodaj następne pytanie"))
                 return RedirectToAction("AddQuestion");

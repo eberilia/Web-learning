@@ -13,6 +13,12 @@ namespace proj.Models
             this.context = context;
         }
 
+        public Quiz AddQuestionToQuiz(Quiz quiz, Question question)
+        {
+            quiz.Questions.Add(question);
+            return UpdateQuiz(quiz);
+        }
+
         public Quiz AddQuiz(Quiz quiz)
         {
             context.Quizes.Add(quiz);
