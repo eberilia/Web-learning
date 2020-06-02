@@ -18,9 +18,9 @@ $(document).ready(function () {
                 $(add_button).addClass("disabled");
                 console.log('You Reached the limits')
             }
-            var id = q + (x + 2)
-            var id_b = id+"bool"
-            var text = ""
+            var id = 'q' + (x + 2)
+            var id_b = id+'bool'
+            var text = ''
             text += '<div class="form-group">'
             text += '<label for="' + id + '" class="control-label">Treść odpowiedzi</label>'
             text += '<input type="text" id="' + id + '" name="' + id + '" class="form-control" value="" placeholder="Treść odpowiedzi" required />'
@@ -30,7 +30,7 @@ $(document).ready(function () {
             text += '</div>'
 
                 
-            $(div).prepend(text);
+            $(add_button).before(text);
             //$(div).append(text);
 
 

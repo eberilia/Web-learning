@@ -47,6 +47,13 @@ namespace proj.Controllers
         public IActionResult CreateQuiz(string submit, string quizname, string category,
             string q, string qa1, string qa1bool, string qa2, string qa2bool)
         {
+            for (int i = 0; i < Request.Form.ToList().Count - 1; i++)
+            {
+                string mess = "Q" + (i + 1);
+                string a = Request.Form.ToList()[i].Value;
+                ViewData[mess] = a;
+            }
+
             Quiz quiz = new Quiz();
             quiz.QuizName = quizname;
             quiz.Category = category;
