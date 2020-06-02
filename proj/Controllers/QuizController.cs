@@ -42,7 +42,7 @@ namespace proj.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateQuiz(string submit, string quizname, string category)
+        public IActionResult CreateQuiz(string submit, string quizname, string category, Quiz quiz)
         {
             Quiz q = new Quiz();
             q.QuizName = quizname;

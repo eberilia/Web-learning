@@ -2,3 +2,48 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+$(document).ready(function () {
+    var max_fields = 6;
+    var pytId = "q1";
+    var div = $("#additional_answer");
+    var add_button = $("#add_answer");
+
+    var x = 0;
+    $(add_button).click(function (e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            if (x == max_fields) {
+                $(add_button).addClass("disabled");
+                console.log('You Reached the limits')
+            }
+
+            var text = ""
+            text += '<div class="form-group">'
+            text += '<a href = "#" class="delete" >Usuń</a>'
+            text += '<label for="q1a2" class="control-label">Treść odpowiedzi</label>'
+            text += '<input type="text" id="q1a2" name="q1a2" class="form-control" value="" placeholder="Treść odpowiedzi" required />'
+            text += '<input type="checkbox" class="form-check-input" id="q1a2bool" value="true" />'
+            text += '<label for="q1a2bool" class="form-check-label">Prawidłowa?</label>' 
+            text += '</div>'
+
+                
+            $(div).prepend(text);
+
+
+            //$(div).append('<div><input type="text" name="mytext[]" /><a href="#" class="delete">Delete</a></div>'); //add input box
+            //$(wrapper).append('<div><div class="form-group">< label for="q1a1" class="control-label" > Treść odpowiedzi</label ><input type="text" id="q1a1" name="q1a1" class="form-control" value="" placeholder="Treść odpowiedzi" required /></div ><div class="form-group form-check"><label for="q1a1bool" class="form-check-label">Prawidłowa?</label><input type="checkbox" class="form-check-input" id="q1a1bool" value="true" /> </div>< a href="#" class="delete" > Delete</a ></div > '); //add input box
+        }
+
+    });
+
+    $(div).on("click", ".delete", function (e) {
+        if (x == max_fields)
+            $(add_button).removeClass("disabled");
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+});
+
