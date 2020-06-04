@@ -7,7 +7,7 @@ $(document).ready(function () {
     var max_fields = 6;
     var div = $("#additional_answer");
     var add_button = $("#add_answer");
-    var prefix="q"
+    var prefix = "q"
 
     var x = 0;
     $(add_button).click(function (e) {
@@ -19,17 +19,17 @@ $(document).ready(function () {
                 console.log('You Reached the limits')
             }
             var id = 'qa' + (x + 2)
-            var id_b = id+'bool'
+            var id_b = id + 'bool'
             var text = ''
             text += '<div class="form-group">'
             text += '<label for="' + id + '" class="control-label">Treść odpowiedzi</label>'
             text += '<input type="text" id="' + id + '" name="' + id + '" class="form-control" value="" placeholder="Treść odpowiedzi" required />'
             text += '<input type="checkbox" class="form-check-input" id="' + id_b + '" name="' + id_b + '"value="true" />'
-            text += '<label for="' + id_b + '" class="form-check-label">Prawidłowa?</label>' 
+            text += '<label for="' + id_b + '" class="form-check-label">Prawidłowa?</label>'
             text += '<a href = "#" class="delete" >Usuń</a>'
             text += '</div>'
 
-                
+
             $(add_button).before(text);
             //$(div).append(text);
 
@@ -49,3 +49,21 @@ $(document).ready(function () {
     })
 });
 
+
+$(document).ready(function () {
+    $("#category").change(function(){
+        var category = $(this).val()
+
+        if (category == "All")
+            $("#quizes button").each(function (i, button) {
+                    $(button).show(300)
+            });
+        else
+        $("#quizes button").each(function(i, button){
+            if($(button).hasClass(category))
+                $(button).show(300)
+            else 
+                $(button).hide(300)
+        });
+    });
+});

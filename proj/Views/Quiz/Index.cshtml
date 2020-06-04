@@ -3,21 +3,40 @@
 }
 
 
-<div class="jumbotron">
-    <div class="text-center">
-        <h1 class="display-4">Wybierz quiz</h1>
-        <br />
-    </div>
-    <form asp-action="Quiz">
-        @{
-            for(int i=0; i<ViewBag.quizes.Count; i++)
-            {
-                <button type="submit" name="ID" value=@ViewBag.quizes[i].IdQuiz class="btn btn-primary btn-lg btn-block">@ViewBag.quizes[i].QuizName</button>
-            }
-            
-        }
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1 class="display-4">Wybierz quiz</h1>
+            <br />
+        </div>
 
-    </form>
-    <hr class="my-4">
-    <input id="Start" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Wróć do strony głównej" class="btn btn-secondary btn-sm" />
-</div>
+        <div>
+            Wyszukuj po kategorii:
+        </div>
+
+        <div class="form-group">
+            <label for="category" class="control-label"></label>
+            <select id="category" name="category">
+                <option selected value="All">Wszystkie</option>
+                @for (int i = 0; i < Category.CATEGORIES.Length; i++)
+                {
+                    <option value=@Category.CATEGORIES[i]>@Category.CATEGORIES[i]</option>
+                }
+
+            </select>
+        </div>
+
+
+            <form id="quizes" asp-action="Quiz">
+                @{
+                    for (int i = 0; i < ViewBag.quizes.Count; i++)
+                    {
+                        <button type="submit" name="ID" value=@ViewBag.quizes[i].IdQuiz class="btn btn-primary btn-lg btn-block @ViewBag.quizes[i].Category">@ViewBag.quizes[i].QuizName</button>
+                    }
+
+                }
+
+            </form>
+
+        <hr class="my-4">
+        <input id="Start" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Wróć do strony głównej" class="btn btn-secondary btn-sm" />
+    </div>
