@@ -55,6 +55,21 @@ $(document).ready(function () {
         var category = $(this).val()
 
         if (category == "All")
+            $("#quizes section").each(function (i, button) {
+                $(button).show(300)
+            });
+        else
+            $("#quizes section").each(function (i, button) {
+                if ($(button).hasClass(category))
+                    $(button).show(300)
+                else
+                    $(button).hide(300)
+            });
+    });
+});
+
+/*
+ * if (category == "All")
             $("#quizes button").each(function (i, button) {
                     $(button).show(300)
             });
@@ -62,8 +77,9 @@ $(document).ready(function () {
         $("#quizes button").each(function(i, button){
             if($(button).hasClass(category))
                 $(button).show(300)
-            else 
+            else
                 $(button).hide(300)
         });
-    });
-});
+ * 
+ * 
+ * */
