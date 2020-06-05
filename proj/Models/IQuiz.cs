@@ -12,7 +12,7 @@ namespace proj.Models
         Quiz AddQuiz(Quiz quiz);
         Quiz UpdateQuiz(Quiz quizChange);
         Quiz DeteleQuiz(int id);
+        List<Quiz> GetUsersQuizes(string username);
 
-        Quiz AddQuestionToQuiz(Quiz quiz, Question question);
     }
 }

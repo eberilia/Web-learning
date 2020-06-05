@@ -41,6 +41,18 @@ namespace proj.Models
             return context.Questions.Find(Id);
         }
 
+        public List<Question> GetQuestionsWithQuizId(uint id)
+        {
+            List<Question> allQuestions = GetAllQuestions().ToList();
+            List<Question> questionsId = new List<Question>();
+
+            for(int i=0; i<allQuestions.Count; i++)
+                if (allQuestions[i].IdQuizFK == id)
+                    questionsId.Add(allQuestions[i]);
+
+            return questionsId;
+        }
+
         public Question UpdateQuestion(Question questionChange)
         {
             var q = context.Questions.Attach(questionChange);

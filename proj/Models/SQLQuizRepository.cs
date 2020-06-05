@@ -13,12 +13,6 @@ namespace proj.Models
             this.context = context;
         }
 
-        public Quiz AddQuestionToQuiz(Quiz quiz, Question question)
-        {
-            quiz.Questions.Add(question);
-            return UpdateQuiz(quiz);
-        }
-
         public Quiz AddQuiz(Quiz quiz)
         {
             context.Quizes.Add(quiz);
@@ -45,6 +39,18 @@ namespace proj.Models
         public Quiz GetQuiz(uint id)
         {
             return context.Quizes.Find(id);
+        }
+
+        public List<Quiz> GetUsersQuizes(string username)
+        {
+            List<Quiz> allQuizes = GetAllQuizes().ToList();
+            List<Quiz> usersQuizes = new List<Quiz>();
+
+            for (int i = 0; i < allQuizes.Count; i++)
+                if (allQuizes[i].UsernameFK.Equals(username))
+                    usersQuizes.Add(allQuizes[i]);
+
+            return usersQuizes;
         }
 
         public Quiz UpdateQuiz(Quiz quizChange)

@@ -12,5 +12,6 @@ namespace proj.Models
         Question AddQuestion(Question question);
         Question UpdateQuestion(Question questionChange);
         Question DeteleQuestion(int id);
+        List<Question> GetQuestionsWithQuizId(uint id);
     }
 }

@@ -51,7 +51,6 @@ namespace proj.Controllers
 
             Question question = new Question();
             question.TextQuestion = q;
-            //question.IdQuizFK = DataStorage.ActualIdQuiz;
             question.IdQuizFK = id;
 
             question.Answer1 = qa1;
@@ -109,14 +108,9 @@ namespace proj.Controllers
 
 
             if (submit.Equals("Dodaj następne pytanie"))
-            {
                 return RedirectToAction("AddQuestion", new { @id = id });
-            }
             else
-            {
                 return RedirectToAction("Index");
-            }
-
         }
 
         [HttpGet]
@@ -141,16 +135,7 @@ namespace proj.Controllers
             _quiz.AddQuiz(quiz);
 
 
-            List<Quiz> allQuizes = new List<Quiz>();
-            allQuizes = _quiz.GetAllQuizes().ToList();
-            List<Quiz> usersQuizes = new List<Quiz>();
-
-            for (int i=0; i < allQuizes.Count; i++)
-            {
-                if (allQuizes[i].UsernameFK.Equals(DataStorage.CurrentlyLoggedInUsername))
-                    usersQuizes.Add(allQuizes[i]);
-            }
-
+            List<Quiz> usersQuizes = _quiz.GetUsersQuizes(DataStorage.CurrentlyLoggedInUsername);
 
             uint actualIdQuiz = usersQuizes[usersQuizes.Count - 1].IdQuiz;
 
@@ -223,19 +208,9 @@ namespace proj.Controllers
         {
             ViewData["ID"] = ID;
 
-
             Quiz q = _quiz.GetQuiz(ID);
 
-            List<Question> allQuestions = _question.GetAllQuestions().ToList();
-            List<Question> questions = new List<Question>();
-            for(int i=0; i<allQuestions.Count; i++)
-            {
-                if(allQuestions[i].IdQuizFK == ID)
-                {
-                    questions.Add(allQuestions[i]);
-                }
-
-            }
+            List<Question> questions = _question.GetQuestionsWithQuizId(ID);
 
             q.Questions = questions;
    
@@ -259,24 +234,13 @@ namespace proj.Controllers
             }
 
 
-            List<Question> allQuestions = _question.GetAllQuestions().ToList();
-            List<Question> questions = new List<Question>();
-
-            for (int i = 0; i < allQuestions.Count; i++)
-            {
-                if (allQuestions[i].IdQuizFK == ID)
-                {
-                    questions.Add(allQuestions[i]);
-                }
-
-            }
+            List<Question> questions = _question.GetQuestionsWithQuizId(ID);
 
             q.Questions = questions;
             sc.Questions = questions;
 
             
             sc.CheckAnswers();
-
 
             return View(sc);
         }
