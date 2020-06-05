@@ -19,6 +19,13 @@ namespace proj.Models
         [Required(ErrorMessage = "Treść pytania jest wymagana.")]
         public string TextQuestion { get; set; }
 
+        /*
+        [Display(Name = "Typ pytania")]
+        [Required(ErrorMessage = "Typ pytania jest wymagany.")]
+        public string QuestionType { get; set; }
+         
+         */
+
         [Display(Name = "Odpowiedź 1")]
         [Required(ErrorMessage = "Treść odpowiedzi jest wymagana.")]
         public string Answer1 { get; set; }

@@ -10,9 +10,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddQuestion">
+        <form asp-action="AddQuestion" asp-route-id=@ViewBag.Id >
             <div class="form-group">
-                <label for="q1" class="control-label">Pytanie :</label>
+                <label for="q1" class="control-label">Pytanie:</label>
                 <input type="text" id="q" name="q" class="form-control" value="" placeholder="Treść pytania" required />
             </div>
             <br />

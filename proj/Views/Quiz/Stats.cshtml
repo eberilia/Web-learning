@@ -2,6 +2,11 @@
 @{
     ViewData["Title"] = "Home Page";
 
+    string m030 = "UPS...";
+    string m3160 = "NIEŹLE!";
+    string m6190 = "SUPER!";
+    string m91100 = "GRATULACJE!";
+
     string mess030 = "Może spróbuj jeszcze raz?";
     string mess3160 = "Popracuj jeszcze trochę!";
     string mess6190 = "Dobrze Ci poszło!";
@@ -15,19 +20,19 @@
                 @{
                     if (@Model.GetPercent() <= 30)
                     {
-                        <span style="color: #0069D9"><b>UPS...</b></span> @mess030;
+                        <span style="color: #0069D9"><b>@m030</b></span> @mess030;
                     }
                     else if (@Model.GetPercent() > 30 && @Model.GetPercent() <= 60)
                     {
-                        <span style="color: #0069D9"><b>NIEŹLE!</b></span> @mess3160;
+                        <span style="color: #0069D9"><b>@m3160</b></span> @mess3160;
                     }
                     else if (@Model.GetPercent() > 60 && @Model.GetPercent() <= 90)
                     {
-                        <span style="color: #0069D9"><b>SUPER!</b></span> @mess6190;
+                        <span style="color: #0069D9"><b>@m6190</b></span> @mess6190;
                     }
                     else
                     {
-                        <span style="color: #0069D9"><b>GRATULACJE!</b></span> @mess91100;
+                        <span style="color: #0069D9"><b>@m91100</b></span> @mess91100;
                     }
                 }
             </h2>

@@ -35,13 +35,14 @@ namespace proj.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddQuestion()
+        public IActionResult AddQuestion(uint id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddQuestion(string submit, string q, string qa1, string qa1bool, string qa2, string qa2bool,
+        public IActionResult AddQuestion(uint id, string submit, string q, string qa1, string qa1bool, string qa2, string qa2bool,
             string qa3, string qa3bool, string qa4, string qa4bool,
             string qa5, string qa5bool, string qa6, string qa6bool,
             string qa7, string qa7bool, string qa8, string qa8bool)
@@ -50,7 +51,8 @@ namespace proj.Controllers
 
             Question question = new Question();
             question.TextQuestion = q;
-            question.IdQuizFK = DataStorage.ActualIdQuiz;
+            //question.IdQuizFK = DataStorage.ActualIdQuiz;
+            question.IdQuizFK = id;
 
             question.Answer1 = qa1;
             question.Answer2 = qa2;
@@ -107,10 +109,11 @@ namespace proj.Controllers
 
 
             if (submit.Equals("Dodaj następne pytanie"))
-                return View();
+            {
+                return RedirectToAction("AddQuestion", new { @id = id });
+            }
             else
             {
-                DataStorage.ActualIdQuiz = 0;
                 return RedirectToAction("Index");
             }
 
@@ -138,16 +141,23 @@ namespace proj.Controllers
             _quiz.AddQuiz(quiz);
 
 
-            /* jakie Id ma nowy quiz? */
-            /* to do - pobranie ostatniego quizu UZYTKOWNIKA a nie z calej listy!*/
             List<Quiz> allQuizes = new List<Quiz>();
             allQuizes = _quiz.GetAllQuizes().ToList();
-            DataStorage.ActualIdQuiz = allQuizes[allQuizes.Count - 1].IdQuiz;
+            List<Quiz> usersQuizes = new List<Quiz>();
+
+            for (int i=0; i < allQuizes.Count; i++)
+            {
+                if (allQuizes[i].UsernameFK.Equals(DataStorage.CurrentlyLoggedInUsername))
+                    usersQuizes.Add(allQuizes[i]);
+            }
+
+
+            uint actualIdQuiz = usersQuizes[usersQuizes.Count - 1].IdQuiz;
 
 
             Question question = new Question();
             question.TextQuestion = q;
-            question.IdQuizFK = DataStorage.ActualIdQuiz;
+            question.IdQuizFK = actualIdQuiz;
 
             question.Answer1 = qa1;
             question.Answer2 = qa2;
@@ -203,13 +213,10 @@ namespace proj.Controllers
             _question.AddQuestion(question);
 
             if (submit.Equals("Dodaj następne pytanie"))
-                return RedirectToAction("AddQuestion");
+                return RedirectToAction("AddQuestion", new { @id = actualIdQuiz});
             else
-            {
-                DataStorage.ActualIdQuiz = 0;
                 return RedirectToAction("Index");
-            }
-                
+            
         }
 
         public IActionResult Quiz(uint ID)
@@ -254,6 +261,7 @@ namespace proj.Controllers
 
             List<Question> allQuestions = _question.GetAllQuestions().ToList();
             List<Question> questions = new List<Question>();
+
             for (int i = 0; i < allQuestions.Count; i++)
             {
                 if (allQuestions[i].IdQuizFK == ID)

@@ -15,7 +15,5 @@ namespace proj.Models
             return CurrentlyLoggedInUsername.Equals("") ? false:true;
         }
 
-
-        public static uint ActualIdQuiz { set; get; } = 0;
     }
 }
