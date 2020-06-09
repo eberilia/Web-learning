@@ -35,7 +35,7 @@ namespace proj.Models
 
                 string[] ans = { Questions[i].Answer1, Questions[i].Answer2, Questions[i].Answer3, Questions[i].Answer4,
                                Questions[i].Answer5, Questions[i].Answer6, Questions[i].Answer7, Questions[i].Answer8};
-                bool[] ansBool = { Questions[i].Answer1Bool, Questions[i].Answer2Bool, Questions[i].Answer3Bool, Questions[i].Answer4Bool,
+                bool?[] ansBool = { Questions[i].Answer1Bool, Questions[i].Answer2Bool, Questions[i].Answer3Bool, Questions[i].Answer4Bool,
                                Questions[i].Answer5Bool, Questions[i].Answer6Bool, Questions[i].Answer7Bool, Questions[i].Answer8Bool};
 
 

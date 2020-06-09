@@ -19,72 +19,58 @@ namespace proj.Models
         [Required(ErrorMessage = "Treść pytania jest wymagana.")]
         public string TextQuestion { get; set; }
 
-        /*
         [Display(Name = "Typ pytania")]
         [Required(ErrorMessage = "Typ pytania jest wymagany.")]
         public string QuestionType { get; set; }
-         
-         */
 
         [Display(Name = "Odpowiedź 1")]
         [Required(ErrorMessage = "Treść odpowiedzi jest wymagana.")]
         public string Answer1 { get; set; }
 
         [Display(Name = "Prawidłowa?")]
-        [DefaultValue(false)]
-        [Required]
-        public bool Answer1Bool { get; set; }
+        public bool? Answer1Bool { get; set; }
 
         [Display(Name = "Odpowiedź 2")]
         [Required(ErrorMessage = "Treść odpowiedzi jest wymagana.")]
         public string Answer2 { get; set; }
-
         [Display(Name = "Prawidłowa?")]
-        [Required]
-        [DefaultValue(false)]
-        public bool Answer2Bool { get; set; }
+        public bool? Answer2Bool { get; set; }
 
         [Display(Name = "Odpowiedź 3")]
         public string Answer3 { get; set; }
-
         [Display(Name = "Prawidłowa?")]
-        [DefaultValue(false)]
-        public bool Answer3Bool { get; set; } = false;
+        public bool? Answer3Bool { get; set; } = false;
 
         [Display(Name = "Odpowiedź 4")]
         public string Answer4 { get; set; }
         [Display(Name = "Prawidłowa?")]
-        [DefaultValue(false)]
-        public bool Answer4Bool { get; set; }
+        public bool? Answer4Bool { get; set; }
 
         [Display(Name = "Odpowiedź 5")]
         public string Answer5 { get; set; }
-        [DefaultValue(false)]
         [Display(Name = "Prawidłowa?")]
-        public bool Answer5Bool { get; set; }
+        public bool? Answer5Bool { get; set; }
 
         [Display(Name = "Odpowiedź 6")]
         public string Answer6 { get; set; }
         [Display(Name = "Prawidłowa?")]
-        [DefaultValue(false)]
-        public bool Answer6Bool { get; set; }
+        public bool? Answer6Bool { get; set; }
 
         [Display(Name = "Odpowiedź 7")]
         public string Answer7 { get; set; }
-        [DefaultValue(false)]
         [Display(Name = "Prawidłowa?")]
-        public bool Answer7Bool { get; set; }
+        public bool? Answer7Bool { get; set; }
 
         [Display(Name = "Odpowiedź 8")]
         public string Answer8 { get; set; }
-        [DefaultValue(false)]
         [Display(Name = "Prawidłowa?")]
-        public bool Answer8Bool { get; set; }
+        public bool? Answer8Bool { get; set; }
 
 
         [ForeignKey("IdQuizFK")]
         public Quiz Quiz { get; set; }
-        
+
+        [Required]
         public uint IdQuizFK { get; set; }
         
         

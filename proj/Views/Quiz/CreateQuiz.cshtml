@@ -33,7 +33,17 @@
                 <h4>DODAJ PYTANIE DO SWOJEGO QUIZU! :)</h4>
                 <!-- PYTANIE  -->
 
-              
+                <div class="form-group">
+                    <label for="type" class="control-label"></label>
+                    <select id="type" name="type">
+                        <option selected value=@QuestionTypes.TYPES.ToList()[0].Key>@QuestionTypes.TYPES.ToList()[0].Value</option>
+                        @for (int i = 1; i < QuestionTypes.TYPES.ToList().Count; i++)
+                        {
+                            <option value=@QuestionTypes.TYPES.ToList()[i].Key>@QuestionTypes.TYPES.ToList()[i].Value</option>
+                        }
+
+                    </select>
+                </div>
 
 
                 <div class="form-group">

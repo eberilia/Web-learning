@@ -20,7 +20,7 @@ namespace proj.Models
             return question;
         }
 
-        public Question DeteleQuestion(int id)
+        public Question DeleteQuestion(int id)
         {
             Question q = context.Questions.Find(id);
             if (q != null)

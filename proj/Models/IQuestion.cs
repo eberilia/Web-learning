@@ -11,7 +11,7 @@ namespace proj.Models
         IEnumerable<Question> GetAllQuestions();
         Question AddQuestion(Question question);
         Question UpdateQuestion(Question questionChange);
-        Question DeteleQuestion(int id);
+        Question DeleteQuestion(int id);
         List<Question> GetQuestionsWithQuizId(uint id);
     }
 }

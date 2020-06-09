@@ -7,9 +7,17 @@ namespace proj.Models
 {
     public class QuestionTypes
     {
-        public static readonly string[] Types = { "Single", "Multiple" };
+        public const string SINGLE = "Pojedynczy wybór";
+        public const string MULTIPLE = "Wielokrotny wybór";
 
+        public static readonly Dictionary<string, string> TYPES = new Dictionary<string, string>{
 
+            { "Single", SINGLE}, 
+            { "Multiple", MULTIPLE}
+        
+        };
+
+       
 
     }
 }

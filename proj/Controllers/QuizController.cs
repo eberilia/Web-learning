@@ -120,12 +120,13 @@ namespace proj.Controllers
         }
         [HttpPost]
         public IActionResult CreateQuiz(string submit, string quizname, string category,
-            string q, string qa1, string qa1bool, string qa2, string qa2bool,
+            string type, string q, string qa1, string qa1bool, string qa2, string qa2bool,
             string qa3, string qa3bool, string qa4, string qa4bool,
             string qa5, string qa5bool, string qa6, string qa6bool,
             string qa7, string qa7bool, string qa8, string qa8bool)
         {
-           
+
+            System.Diagnostics.Debug.WriteLine(type);
 
             Quiz quiz = new Quiz();
             quiz.QuizName = quizname;
@@ -136,12 +137,12 @@ namespace proj.Controllers
 
 
             List<Quiz> usersQuizes = _quiz.GetUsersQuizes(DataStorage.CurrentlyLoggedInUsername);
-
             uint actualIdQuiz = usersQuizes[usersQuizes.Count - 1].IdQuiz;
 
 
             Question question = new Question();
             question.TextQuestion = q;
+            question.QuestionType = type;
             question.IdQuizFK = actualIdQuiz;
 
             question.Answer1 = qa1;

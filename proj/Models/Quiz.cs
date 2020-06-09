@@ -22,15 +22,21 @@ namespace proj.Models
         public string QuizName { get; set; }
 
         [Display(Name = "Kategoria")]
-        [DefaultValue(Models.Category.INNE)]
+        //[DefaultValue(Models.Category.INNE)]
+        /*D*/
+        [Required(ErrorMessage = "Kategoria jest wymagana.")]
         public string Category { get; set; }
 
 
       
         public ICollection<Question> Questions { get; set; }
 
+        /*D*/
+        
         [ForeignKey("UsernameFK")]
         public User User { get; set; }
+
+        [Required]
         public string UsernameFK { get; set; }
         
         
