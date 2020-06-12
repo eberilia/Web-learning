@@ -12,8 +12,8 @@ namespace proj.Models
 
         public static readonly Dictionary<string, string> TYPES = new Dictionary<string, string>{
 
-            { "Single", SINGLE}, 
-            { "Multiple", MULTIPLE}
+            { "radio", SINGLE}, 
+            { "checkbox", MULTIPLE}
         
         };
 
