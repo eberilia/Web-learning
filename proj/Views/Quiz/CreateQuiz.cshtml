@@ -6,29 +6,27 @@
 @if (DataStorage.IsLoggedIn())
 {
 
-    <h1>Stwórz Quiz</h1>
-
-    <h4>Quiz</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="CreateQuiz" method="post">
-                <div class="form-group">
-                    <label for="quizname" class="control-label">Nazwa quizu</label>
-                    <input type="text" id="quizname" name="quizname" class="form-control" value="" placeholder="Nazwa Twojego quizu" required />
-                    <span asp-validation-for="@Model.QuizName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="category" class="control-label"></label>
-                    <select id="category" name="category">
-                        @for (int i = 0; i < Category.CATEGORIES.Length - 1; i++)
-                        {
-                            <option value=@Category.CATEGORIES[i]>@Category.CATEGORIES[i]</option>
-                        }
-                        <option selected value=@Category.CATEGORIES[Category.CATEGORIES.Length - 1]>@Category.CATEGORIES[Category.CATEGORIES.Length - 1]</option>
-                    </select>
-                    <span asp-validation-for="Category" class="text-danger"></span>
-                </div>
+    <div class="jumbotron">
+        <h1>Stwórz Quiz</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="CreateQuiz" method="post">
+                    <div class="form-group">
+                        <label for="quizname" class="control-label">Nazwa quizu</label>
+                        <input type="text" id="quizname" name="quizname" class="form-control" value="" placeholder="Nazwa Twojego quizu" required />
+                        <span asp-validation-for="@Model.QuizName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="control-label">Kategoria</label>
+                        <select id="category" name="category">
+                            @for (int i = 0; i < Category.CATEGORIES.Length - 1; i++)
+                            {
+                                <option value=@Category.CATEGORIES[i]>@Category.CATEGORIES[i]</option>
+                            }
+                            <option selected value=@Category.CATEGORIES[Category.CATEGORIES.Length - 1]>@Category.CATEGORIES[Category.CATEGORIES.Length - 1]</option>
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
 
                 <h4>DODAJ PYTANIE DO SWOJEGO QUIZU! :)</h4>
                 <!-- PYTANIE  -->
@@ -46,38 +44,6 @@
                 </div>
 
 
-                <!--
-                            <div class="form-group">
-                                <label for="q1" class="control-label">Pytanie:</label>
-                                <input type="text" id="q" name="q" class="form-control" value="" placeholder="Treść pytania" required />
-                            </div>
-                            <br />
-                            <div class="form-group">
-                                <label for="qa1" class="control-label">Treść odpowiedzi</label>
-                                <input type="text" id="qa1" name="qa1" class="form-control" value="" placeholder="Treść odpowiedzi" required />
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="qa1bool" name="qa1bool" value="1" />
-                                <label for="qa1bool" class="form-check-label">Prawidłowa?</label>
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="qa2" class="control-label">Treść odpowiedzi</label>
-                                <input type="text" id="qa2" name="qa2" class="form-control" value="" placeholder="Treść odpowiedzi" required />
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="qa2bool" name="qa2bool" value="1" />
-                                <label for="qa2bool" class="form-check-label">Prawidłowa?</label>
-                            </div>
-
-
-                            <div id="additional_answer">
-                                <button id="add_answer" class="btn btn-primary">Dodaj kolejną odpowiedź</button>
-                            </div>
-
-
-                -->
 
                 <div class="form-group">
                     <label for="q" class="control-label">Pytanie:</label>
@@ -88,60 +54,72 @@
 
 
                 <section id="answers">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="radio" id="qa0_bool" name="qbool" value="q1">
+                        <p>Odpowiedzi</p>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="radio" id="qa0_bool" name="qbool" value="q1">
+                                </div>
                             </div>
+                            <input type="text" class="form-control" id="qa1" name="qa1" value="" placeholder="Treść odpowiedzi" required>
                         </div>
-                        <input type="text" class="form-control" id="qa1" name="qa1" value="" placeholder="Treść odpowiedzi" required>
-                    </div>
 
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="radio" id="qa1_bool" name="qbool" value="q2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="radio" id="qa1_bool" name="qbool" value="q2">
+                                </div>
                             </div>
+                            <input type="text" class="form-control" id="qa2" name="qa2" value="" placeholder="Treść odpowiedzi" required>
                         </div>
-                        <input type="text" class="form-control" id="qa2" name="qa2" value="" placeholder="Treść odpowiedzi" required>
+
+                        <br />
+                        <div id="additional_answer">
+                            <button id="add_answer" class="btn btn-secondary">Dodaj kolejną odpowiedź</button>
+                        </div>
+                    </section>
+
+
+       
+                    <div class="form-group">
+                        <input type="submit" name="submit" value="Dodaj następne pytanie" class="btn btn-primary" />
                     </div>
 
-                    <div id="additional_answer">
-                        <button id="add_answer" class="btn btn-primary">Dodaj kolejną odpowiedź</button>
+                    <div class="form-group">
+                        <input type="submit" name="submit" value="STWÓRZ" class="btn btn-primary" />
                     </div>
-                </section>
-
-                <div class="form-group">
-                    <input type="submit" name="submit" value="Dodaj następne pytanie" class="btn btn-primary" />
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" name="submit" value="STWÓRZ" class="btn btn-primary" />
-                </div>
 
 
 
 
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
 
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+ </div>
+        }
+       
+
+
 
 
 }
 else
-{
-    <div>
-        <input id="signin" onclick="location.href='@Url.Action("Login", "Home")'" type="button" value="Zaloguj się" />
-
-        <h6>Nie masz konta? Zarejestruj się:</h6>
-        <input id="signup" onclick="location.href='@Url.Action("CreateUser", "Home")'" type="button" value="Zarejestruj się" />
-    </div>
-}
+        {
+        <div class="jumbotron">
+            <h1 class="display-4">Stwórz quiz</h1>
+            <br />
+            <p class="lead">Aby utworzyć własny quiz, musisz się zalogować.</p>
+            <input id="signin" onclick="location.href='@Url.Action("Login", "Home")'" type="button" value="Zaloguj się" class="btn btn-primary btn" />
+            <br /><br />
+            <p class="lead">Nie masz konta?</p>
+            <input id="signup" onclick="location.href='@Url.Action("CreateUser", "Home")'" type="button" value="Zarejestruj się" class="btn btn-secondary btn" />
+        </div>
 
 
