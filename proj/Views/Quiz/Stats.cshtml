@@ -64,9 +64,6 @@
                 //string youranswer = "Twoja odpowiedź: " + ViewData[n];
                 List<string> usersAnswers = Model.UserAnswers[(uint)i + 1];
 
-
-
-
                 <div class="accordion" id="accordionExample">
                     <div class="card">
                         <div class="card-header" id="@headingnumber">
@@ -75,14 +72,16 @@
                                     <span style="color: black">@question</span>
 
                                     @{
-                                        if (Model.GetPoints((uint)i + 1) == Model.GetMaxPoints((uint)i + 1))
+                                        if (Model.GetPoints((uint)i + 1) == 1.0)
                                         {
                                             <span style="color: green">DOBRZE</span>
+                                            <span style="color: green">Uzyskałeś: @Model.GetPoints((uint)i + 1) Punktów</span>
                                         }
 
                                         else
                                         {
                                             <span style="color: red">ŹLE</span>
+                                            <span style="color: red">Uzyskałeś: @Model.GetPoints((uint)i + 1) Punktów</span>
                                         }
                                     }
 
@@ -109,7 +108,7 @@
 
                                     for (int j = 0; j < correctAnswers.Count; j++)
                                     {
-                                        
+
                                         <p>@correctAnswers[j]</p>
                                     }
 

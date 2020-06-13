@@ -29,63 +29,76 @@ namespace proj.Models
             GetCorrectAnswersFromQuestions();
         }
 
-        public uint GetPoints(uint answerId)
+        public double GetPoints(uint answerId)
         {
-            uint points = 0;
-            foreach (bool answer in UserCorrectnessAnswers[answerId])
-                if (answer)
+            bool isMultitype = Questions[(int)answerId - 1].
+                            QuestionType.
+                            Equals("checkbox");
+
+            double points = isMultitype? 1:0;
+
+            if (isMultitype)
+            {
+                foreach (bool answer in UserCorrectnessAnswers[answerId])
+                {
+                    if (!answer)
+                    {
+                        points -= 1.0 / AllAnswers[answerId].Count;
+                    }
+                }
+
+                foreach(string ansCorrect in AnswersCorrect[answerId])
+                {
+                    if (!UserAnswers[answerId].Contains(ansCorrect))
+                    {
+                        points -= 1.0 / AllAnswers[answerId].Count;
+                    }
+                }
+            }
+            else
+            {
+                if (UserCorrectnessAnswers[answerId][0])
                     points++;
+            }
+
+            if (points < 0)
+                return 0;
             return points;
         }
 
-        public uint GetMaxPoints(uint answerId)
+        public double GetPoints()
         {
-            uint points = 0;
-            foreach (bool answer in CorrectAnswers[answerId])
-                if (answer)
-                    points++;
-            return points;
-        }
-
-        public uint GetPoints()
-        {
-            uint points = 0;
+            double points = 0;
 
             for (uint i = 1; i <= Questions.Count; i++)
                 points += GetPoints(i);
             return points;
         }
 
-        public float GetPercent()
+        public double GetPercent()
         {
-            float percent = (GetPoints() / (float)getUserCorrectAnswersCount()) * 100;
-
-            return percent;
-        }
-
-        public int getUserCorrectAnswersCount()
-        {
-            int count = 0;
-            foreach (var ans in UserCorrectnessAnswers)
-                count += ans.Value.Count;
-            return count;
+            return GetPoints() / Questions.Count * 100;
         }
 
         public void CheckAnswers()
         {
             for (uint i = 1; i <= Questions.Count; i++)
             {
-                List<string> userAnswers = UserAnswers[i];
+                List<string> userAnswers = new List<string>();
+                if (UserAnswers.ContainsKey(i))
+                    userAnswers = UserAnswers[i];
+                else
+                    UserAnswers.Add(i, new List<string>());
                 List<bool> correctAnswers = CorrectAnswers[i];
                 List<bool> userCorrectnessAnswers = new List<bool>();
 
-                for (int j = 0; j < userAnswers.Count; j++)
-                {
-                    if (correctAnswers[GetIdAnswer(userAnswers[j], i)])
-                        userCorrectnessAnswers.Add(true);
-                    else
-                        userCorrectnessAnswers.Add(false);
-                }
+                    for (int j = 0; j < userAnswers.Count; j++)
+                    {
+                        if (correctAnswers[GetIdAnswer(userAnswers[j], i)])
+                            userCorrectnessAnswers.Add(true);
+                        else
+                            userCorrectnessAnswers.Add(false);
+                    }
                 UserCorrectnessAnswers.Add(i, userCorrectnessAnswers);
             }
         }
