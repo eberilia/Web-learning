@@ -11,7 +11,7 @@ namespace proj.Models
         IEnumerable<Quiz> GetAllQuizes();
         Quiz AddQuiz(Quiz quiz);
         Quiz UpdateQuiz(Quiz quizChange);
-        Quiz DeteleQuiz(int id);
+        Quiz DeteleQuiz(uint id);
         List<Quiz> GetUsersQuizes(string username);
 
     }

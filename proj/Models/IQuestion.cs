@@ -7,11 +7,11 @@ namespace proj.Models
 {
     public interface IQuestion
     {
-        Question GetQuestion(int Id);
+        Question GetQuestion(uint Id);
         IEnumerable<Question> GetAllQuestions();
         Question AddQuestion(Question question);
         Question UpdateQuestion(Question questionChange);
-        Question DeleteQuestion(int id);
+        Question DeleteQuestion(uint id);
         List<Question> GetQuestionsWithQuizId(uint id);
     }
 }

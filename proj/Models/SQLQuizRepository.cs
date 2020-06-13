@@ -20,7 +20,7 @@ namespace proj.Models
             return quiz;
         }
 
-        public Quiz DeteleQuiz(int id)
+        public Quiz DeteleQuiz(uint id)
         {
             Quiz q = context.Quizes.Find(id);
             if (q != null)

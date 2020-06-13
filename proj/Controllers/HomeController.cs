@@ -129,6 +129,22 @@ namespace proj.Controllers
         }
 
 
+        public IActionResult DeleteQuiz(uint id)
+        {
+            List<Question> questions = new List<Question>();
+            questions = _question.GetQuestionsWithQuizId(id);
+
+            for(int i=0; i<questions.Count; i++)
+            {
+                _question.DeleteQuestion(questions[i].IdQuestion);
+            }
+
+            _quiz.DeteleQuiz(id);
+
+            return RedirectToAction("MyProfile");
+        }
+
+
         public IActionResult Index()
         {
             return View();
