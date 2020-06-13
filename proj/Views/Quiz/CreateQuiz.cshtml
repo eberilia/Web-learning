@@ -28,32 +28,32 @@
                         <span asp-validation-for="Category" class="text-danger"></span>
                     </div>
 
-                <h4>DODAJ PYTANIE DO SWOJEGO QUIZU! :)</h4>
-                <!-- PYTANIE  -->
+                    <h4>DODAJ PYTANIE DO SWOJEGO QUIZU! :)</h4>
+                    <!-- PYTANIE  -->
 
-                <div class="form-group">
-                    <label for="type_question" class="control-label"></label>
-                    <select id="type_question" name="type_question">
-                        <option selected value=@QuestionTypes.TYPES.ToList()[0].Key>@QuestionTypes.TYPES.ToList()[0].Value</option>
-                        @for (int i = 1; i < QuestionTypes.TYPES.ToList().Count; i++)
-                        {
-                            <option value=@QuestionTypes.TYPES.ToList()[i].Key>@QuestionTypes.TYPES.ToList()[i].Value</option>
-                        }
+                    <div class="form-group">
+                        <label for="type_question" class="control-label"></label>
+                        <select id="type_question" name="type_question">
+                            <option selected value=@QuestionTypes.TYPES.ToList()[0].Key>@QuestionTypes.TYPES.ToList()[0].Value</option>
+                            @for (int i = 1; i < QuestionTypes.TYPES.ToList().Count; i++)
+                            {
+                                <option value=@QuestionTypes.TYPES.ToList()[i].Key>@QuestionTypes.TYPES.ToList()[i].Value</option>
+                            }
 
-                    </select>
-                </div>
-
-
-
-                <div class="form-group">
-                    <label for="q" class="control-label">Pytanie:</label>
-                    <input type="text" id="q" name="q" class="form-control" value="" placeholder="Treść pytania" required />
-                </div>
-                <br />
+                        </select>
+                    </div>
 
 
 
-                <section id="answers">
+                    <div class="form-group">
+                        <label for="q" class="control-label">Pytanie:</label>
+                        <input type="text" id="q" name="q" class="form-control" value="" placeholder="Treść pytania" required />
+                    </div>
+                    <br />
+
+
+
+                    <section id="answers">
                         <p>Odpowiedzi</p>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -80,7 +80,7 @@
                     </section>
 
 
-       
+
                     <div class="form-group">
                         <input type="submit" name="submit" value="Dodaj następne pytanie" class="btn btn-primary" />
                     </div>
@@ -102,24 +102,20 @@
             <a asp-action="Index">Back to List</a>
         </div>
 
- </div>
-        }
-       
-
-
+    </div>
 
 
 }
 else
-        {
-        <div class="jumbotron">
-            <h1 class="display-4">Stwórz quiz</h1>
-            <br />
-            <p class="lead">Aby utworzyć własny quiz, musisz się zalogować.</p>
-            <input id="signin" onclick="location.href='@Url.Action("Login", "Home")'" type="button" value="Zaloguj się" class="btn btn-primary btn" />
-            <br /><br />
-            <p class="lead">Nie masz konta?</p>
-            <input id="signup" onclick="location.href='@Url.Action("CreateUser", "Home")'" type="button" value="Zarejestruj się" class="btn btn-secondary btn" />
-        </div>
+{
+    <div class="jumbotron">
+        <h1 class="display-4">Stwórz quiz</h1>
+        <br />
+        <p class="lead">Aby utworzyć własny quiz, musisz się zalogować.</p>
+        <input id="signin" onclick="location.href='@Url.Action("Login", "Home")'" type="button" value="Zaloguj się" class="btn btn-primary btn" />
+        <br /><br />
+        <p class="lead">Nie masz konta?</p>
+        <input id="signup" onclick="location.href='@Url.Action("CreateUser", "Home")'" type="button" value="Zarejestruj się" class="btn btn-secondary btn" />
+    </div>
 
-
+}
