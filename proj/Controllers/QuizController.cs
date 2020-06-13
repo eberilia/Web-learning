@@ -200,31 +200,25 @@ namespace proj.Controllers
         public IActionResult Stats(uint ID)
         {
 
-            Score sc = new Score();
-            sc.IdQuiz = ID;
+            Score sc = new Score(ID, _question.GetQuestionsWithQuizId(ID));
 
-            Quiz q = _quiz.GetQuiz(ID);
-
-            for (int i=0; i<Request.Form.ToList().Count - 1; i++)
+            for (int i = 0; i < Request.Form.ToList().Count - 1; i++)
             {
-                string mess = "Q" + (i + 1);
-                string a = Request.Form.ToList()[i].Value;
-                ViewData[mess] = a;
-                sc.UserAnswers.Add(a);
+                //string mess = "Q" + (i + 1);
+                string[] val = Request.Form.ToList()[i].Value;
+                uint key = (uint)i + 1;
+                for (int j = 0; j < val.Length; j++)
+                    sc.AddToUserAnswers(key, val[j]);
+                //ViewData[mess] = a;
+                //sc.UserAnswers.Add(a);
             }
 
 
-            List<Question> questions = _question.GetQuestionsWithQuizId(ID);
 
-            q.Questions = questions;
-            sc.Questions = questions;
-
-            
             sc.CheckAnswers();
-
             return View(sc);
         }
 
-          
+
     }
 }

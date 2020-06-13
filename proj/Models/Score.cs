@@ -9,94 +9,130 @@ namespace proj.Models
     public class Score
     {
         public uint IdQuiz { get; set; }
-        public List<string> UserAnswers { get; set; }
         public List<Question> Questions { get; set; }
-        public List<string> CorrectAnswers { get; set; }
+        public Dictionary<uint, List<string>> AllAnswers { get; set; }
+        public Dictionary<uint, List<string>> AnswersCorrect { get; set; }
+        public Dictionary<uint, List<bool>> CorrectAnswers { get; set; }
+        public Dictionary<uint, List<string>> UserAnswers { get; set; }
+        public Dictionary<uint, List<bool>> UserCorrectnessAnswers { get; set; }
 
-        //public Dictionary<uint, List<bool>> UserCorrectnessAnswers { get; set; }
-        public List<bool> UserCorrectnessAnswers { get; set; }
-
-
-        public Score()
+        public Score(uint idQuiz, List<Question> questions)
         {
-            UserAnswers = new List<string>();
-            Questions = new List<Question>();
-            UserCorrectnessAnswers = new List<bool>();
-            CorrectAnswers = new List<string>();
-            //UserCorrectnessAnswers = new Dictionary<uint, List<bool>>();
+            IdQuiz = idQuiz;
+            Questions = questions;
+            UserAnswers = new Dictionary<uint, List<string>>();
+            UserCorrectnessAnswers = new Dictionary<uint, List<bool>>();
+            AllAnswers = new Dictionary<uint, List<string>>();
+            AnswersCorrect = new Dictionary<uint, List<string>>();
+            CorrectAnswers = new Dictionary<uint, List<bool>>();
 
-
-            //CorrectAnswers = new List<string>();
-        }
-        private void GetCorrectAnswersFromQuestions()
-        {
-            for(int i=0; i<Questions.Count; i++)
-            {
-
-                string[] ans = { Questions[i].Answer1, Questions[i].Answer2, Questions[i].Answer3, Questions[i].Answer4,
-                               Questions[i].Answer5, Questions[i].Answer6, Questions[i].Answer7, Questions[i].Answer8};
-                bool?[] ansBool = { Questions[i].Answer1Bool, Questions[i].Answer2Bool, Questions[i].Answer3Bool, Questions[i].Answer4Bool,
-                               Questions[i].Answer5Bool, Questions[i].Answer6Bool, Questions[i].Answer7Bool, Questions[i].Answer8Bool};
-
-
-                for (int j = 0; i < ans.Length; j++)
-                {
-                    if (ans[j] == null)
-                        break;
-
-                    if(ansBool[j] == true)
-                    {
-                        CorrectAnswers.Add(ans[j]);
-                        break;
-                    }
-                }
-
-            }
-            
-        }
-        public List<bool> CheckAnswers()
-        {
             GetCorrectAnswersFromQuestions();
+        }
 
-            
+        public uint GetPoints(uint answerId)
+        {
+            uint points = 0;
+            foreach (bool answer in UserCorrectnessAnswers[answerId])
+                if (answer)
+                    points++;
+            return points;
+        }
 
-            for(int i=0; i<UserAnswers.Count; i++)
-            {
-                if (UserAnswers[i].Equals(CorrectAnswers[i]))
-                    UserCorrectnessAnswers.Add(true);
-                else
-                    UserCorrectnessAnswers.Add(false);
-
-            }
-
-         
-            return UserCorrectnessAnswers;
+        public uint GetMaxPoints(uint answerId)
+        {
+            uint points = 0;
+            foreach (bool answer in CorrectAnswers[answerId])
+                if (answer)
+                    points++;
+            return points;
         }
 
         public uint GetPoints()
         {
             uint points = 0;
-            /*foreach(bool a in UserCorrectnessAnswers)
-                if (a)
-                    points++;*/
-            
-            for(int i=0; i<UserCorrectnessAnswers.Count; i++)
-            {
-                if (UserCorrectnessAnswers[i] == true)
-                    points++;
-            }
 
+            for (uint i = 1; i <= Questions.Count; i++)
+                points += GetPoints(i);
             return points;
         }
 
         public float GetPercent()
         {
-            float percent = ( GetPoints() / (float)UserCorrectnessAnswers.Count) * 100;
+            float percent = (GetPoints() / (float)getUserCorrectAnswersCount()) * 100;
 
             return percent;
         }
 
+        public int getUserCorrectAnswersCount()
+        {
+            int count = 0;
+            foreach (var ans in UserCorrectnessAnswers)
+                count += ans.Value.Count;
+            return count;
+        }
+
+        public void CheckAnswers()
+        {
+            for (uint i = 1; i <= Questions.Count; i++)
+            {
+                List<string> userAnswers = UserAnswers[i];
+                List<bool> correctAnswers = CorrectAnswers[i];
+                List<bool> userCorrectnessAnswers = new List<bool>();
+
+                for (int j = 0; j < userAnswers.Count; j++)
+                {
+                    if (correctAnswers[GetIdAnswer(userAnswers[j], i)])
+                        userCorrectnessAnswers.Add(true);
+                    else
+                        userCorrectnessAnswers.Add(false);
+                }
+                UserCorrectnessAnswers.Add(i, userCorrectnessAnswers);
+            }
+        }
+
+        private int GetIdAnswer(string userAnswer, uint quesionId)
+        {
+            for (int i = 0; i < AllAnswers[quesionId].Count; i++)
+                if (userAnswer.Equals(AllAnswers[quesionId][i]))
+                    return i;
+            return -1;
+        }
+
+        private void GetCorrectAnswersFromQuestions()
+        {
+            uint numberQuestion = 1;
+            foreach (Question question in Questions)
+            {
+                List<string> answers = new List<string>() { question.Answer1, question.Answer2, question.Answer3, question.Answer4,
+                                       question.Answer5, question.Answer6, question.Answer7, question.Answer8};
+                List<bool> answersBool = new List<bool>(){ question.Answer1Bool==true?true:false, question.Answer2Bool==true?true:false, question.Answer3Bool==true?true:false, question.Answer4Bool==true?true:false,
+                                       question.Answer5Bool==true?true:false, question.Answer6Bool==true?true:false, question.Answer7Bool==true?true:false, question.Answer8Bool==true?true:false};
+                List<string> ansCor = new List<string>();
+                for (int i=0;  i< answersBool.Count; i++)
+                {
+                    if (answersBool[i])
+                        ansCor.Add(answers[i]);
+                }
+
+                AllAnswers.Add(numberQuestion, answers);
+                CorrectAnswers.Add(numberQuestion, answersBool);
+                AnswersCorrect.Add(numberQuestion, ansCor);
+                numberQuestion++;
+            }
+        }
+
+        public void AddToUserAnswers(uint key, string val)
+        {
+            if (UserAnswers.ContainsKey(key))
+                UserAnswers[key].Add(val);
+            else
+            {
+                UserAnswers.Add(key, new List<string>());
+                UserAnswers[key].Add(val);
+            }
+        }
 
 
     }
+
 }
