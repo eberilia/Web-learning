@@ -129,9 +129,10 @@
 
         <br />
         <form asp-action="Quiz">
-            <button type="submit" name="ID" value=@Model.IdQuiz class="btn btn-primary btn-sm">Spróbuj jeszcze raz</button>
+            <button type="submit" name="ID" value=@Model.IdQuiz class="btn btn-primary">Spróbuj jeszcze raz</button>
+            <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Powrót" class="btn btn-secondary" />
         </form>
-        <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Strona główna" class="btn btn-secondary btn-sm" />
+        
 
     </div>
 </div>
