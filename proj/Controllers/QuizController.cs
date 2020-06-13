@@ -42,16 +42,15 @@ namespace proj.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddQuestion(uint id, string submit, string q, string qa1, string qa1bool, string qa2, string qa2bool,
-            string qa3, string qa3bool, string qa4, string qa4bool,
-            string qa5, string qa5bool, string qa6, string qa6bool,
-            string qa7, string qa7bool, string qa8, string qa8bool)
+        public IActionResult AddQuestion(uint id, string submit, string type_question, string q,
+            string qa1, string qa2, string qa3, string qa4,
+            string qa5, string qa6, string qa7, string qa8, string [] qbool)
         {
-
 
             Question question = new Question();
             question.TextQuestion = q;
             question.IdQuizFK = id;
+            question.QuestionType = type_question;
 
             question.Answer1 = qa1;
             question.Answer2 = qa2;
@@ -63,45 +62,34 @@ namespace proj.Controllers
             if (qa7 != null) question.Answer7 = qa7;
             if (qa8 != null) question.Answer8 = qa8;
 
-            if (qa1bool != null)
-                question.Answer1Bool = true;
-            else
-                question.Answer1Bool = false;
+            for (int i = 0; i < qbool.Length; i++)
+            {
 
-            if (qa2bool != null)
-                question.Answer2Bool = true;
-            else
-                question.Answer2Bool = false;
+                if (qbool[i].ElementAt(1) == '1')
+                    question.Answer1Bool = true;
 
-            if (qa3bool != null)
-                question.Answer3Bool = true;
-            else
-                question.Answer3Bool = false;
+                else if (qbool[i].ElementAt(1) == '2')
+                    question.Answer2Bool = true;
 
-            if (qa4bool != null)
-                question.Answer4Bool = true;
-            else
-                question.Answer4Bool = false;
+                else if (qbool[i].ElementAt(1) == '3')
+                    question.Answer3Bool = true;
 
-            if (qa5bool != null)
-                question.Answer5Bool = true;
-            else
-                question.Answer5Bool = false;
+                else if (qbool[i].ElementAt(1) == '4')
+                    question.Answer4Bool = true;
 
-            if (qa6bool != null)
-                question.Answer6Bool = true;
-            else
-                question.Answer6Bool = false;
+                else if (qbool[i].ElementAt(1) == '5')
+                    question.Answer5Bool = true;
 
-            if (qa7bool != null)
-                question.Answer7Bool = true;
-            else
-                question.Answer7Bool = false;
+                else if (qbool[i].ElementAt(1) == '6')
+                    question.Answer6Bool = true;
 
-            if (qa8bool != null)
-                question.Answer8Bool = true;
-            else
-                question.Answer8Bool = false;
+                else if (qbool[i].ElementAt(1) == '7')
+                    question.Answer7Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '8')
+                    question.Answer8Bool = true;
+
+            }
 
 
             _question.AddQuestion(question);
@@ -118,15 +106,15 @@ namespace proj.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult CreateQuiz(string submit, string quizname, string category,
-            string type, string q, string qa1, string qa1bool, string qa2, string qa2bool,
-            string qa3, string qa3bool, string qa4, string qa4bool,
-            string qa5, string qa5bool, string qa6, string qa6bool,
-            string qa7, string qa7bool, string qa8, string qa8bool)
+            string type_question, string q,
+            string qa1, string qa2, string qa3, string qa4,
+            string qa5, string qa6, string qa7, string qa8, string [] qbool)
         {
 
-            System.Diagnostics.Debug.WriteLine(type);
+            //System.Diagnostics.Debug.WriteLine(type);
 
             Quiz quiz = new Quiz();
             quiz.QuizName = quizname;
@@ -142,7 +130,7 @@ namespace proj.Controllers
 
             Question question = new Question();
             question.TextQuestion = q;
-            question.QuestionType = type;
+            question.QuestionType = type_question;
             question.IdQuizFK = actualIdQuiz;
 
             question.Answer1 = qa1;
@@ -155,45 +143,36 @@ namespace proj.Controllers
             if (qa7 != null) question.Answer7 = qa7;
             if (qa8 != null) question.Answer8 = qa8;
 
-            if (qa1bool != null)
-                question.Answer1Bool = true;
-            else
-                question.Answer1Bool = false;
 
-            if (qa2bool != null)
-                question.Answer2Bool = true;
-            else
-                question.Answer2Bool = false;
+            for(int i=0; i<qbool.Length; i++)
+            {
 
-            if (qa3bool != null)
-                question.Answer3Bool = true;
-            else
-                question.Answer3Bool = false;
+                if (qbool[i].ElementAt(1) == '1')
+                    question.Answer1Bool = true;
 
-            if (qa4bool != null)
-                question.Answer4Bool = true;
-            else
-                question.Answer4Bool = false;
+                else if (qbool[i].ElementAt(1) == '2')
+                    question.Answer2Bool = true;
 
-            if (qa5bool != null)
-                question.Answer5Bool = true;
-            else
-                question.Answer5Bool = false;
+                else if (qbool[i].ElementAt(1) == '3')
+                    question.Answer3Bool = true;
 
-            if (qa6bool != null)
-                question.Answer6Bool = true;
-            else
-                question.Answer6Bool = false;
+                else if (qbool[i].ElementAt(1) == '4')
+                    question.Answer4Bool = true;
 
-            if (qa7bool != null)
-                question.Answer7Bool = true;
-            else
-                question.Answer7Bool = false;
+                else if (qbool[i].ElementAt(1) == '5')
+                    question.Answer5Bool = true;
 
-            if (qa8bool != null)
-                question.Answer8Bool = true;
-            else
-                question.Answer8Bool = false;
+                else if (qbool[i].ElementAt(1) == '6')
+                    question.Answer6Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '7')
+                    question.Answer7Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '8')
+                    question.Answer8Bool = true;
+
+            }
+
 
            
             _question.AddQuestion(question);
@@ -221,31 +200,25 @@ namespace proj.Controllers
         public IActionResult Stats(uint ID)
         {
 
-            Score sc = new Score();
-            sc.IdQuiz = ID;
+            Score sc = new Score(ID, _question.GetQuestionsWithQuizId(ID));
 
-            Quiz q = _quiz.GetQuiz(ID);
-
-            for (int i=0; i<Request.Form.ToList().Count - 1; i++)
+            for (int i = 0; i < Request.Form.ToList().Count - 1; i++)
             {
-                string mess = "Q" + (i + 1);
-                string a = Request.Form.ToList()[i].Value;
-                ViewData[mess] = a;
-                sc.UserAnswers.Add(a);
+                //string mess = "Q" + (i + 1);
+                string[] val = Request.Form.ToList()[i].Value;
+                uint key = (uint)i + 1;
+                for (int j = 0; j < val.Length; j++)
+                    sc.AddToUserAnswers(key, val[j]);
+                //ViewData[mess] = a;
+                //sc.UserAnswers.Add(a);
             }
 
 
-            List<Question> questions = _question.GetQuestionsWithQuizId(ID);
 
-            q.Questions = questions;
-            sc.Questions = questions;
-
-            
             sc.CheckAnswers();
-
             return View(sc);
         }
 
-          
+
     }
 }
