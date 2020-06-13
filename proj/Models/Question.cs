@@ -39,7 +39,7 @@ namespace proj.Models
         [Display(Name = "Odpowiedź 3")]
         public string Answer3 { get; set; }
         [Display(Name = "Prawidłowa?")]
-        public bool? Answer3Bool { get; set; } = false;
+        public bool? Answer3Bool { get; set; }
 
         [Display(Name = "Odpowiedź 4")]
         public string Answer4 { get; set; }

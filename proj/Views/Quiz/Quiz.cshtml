@@ -29,10 +29,21 @@
                     if (answers[i] == null)
                         break;
 
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id=@id name=@n value="@answers[i]" required>
-                        <label class="custom-control-label" for=@id>@answers[i]</label><br>
-                    </div>
+                    @if (q.QuestionType.Equals("radio"))
+                    {
+                        <div class="custom-control custom-radio">
+                            <input type=@q.QuestionType class="custom-control-input" id=@id name=@n value="@answers[i]" required>
+                            <label class="custom-control-label" for=@id>@answers[i]</label><br>
+                        </div>
+                    }
+                    else if (q.QuestionType.Equals("checkbox"))
+                    {
+                        <div class="custom-control custom-checkbox">
+                            <input type=@q.QuestionType class="custom-control-input" id=@id name=@n value="@answers[i]">
+                            <label class="custom-control-label" for=@id>@answers[i]</label><br>
+                        </div>
+                    }
+
                 }
 
 
