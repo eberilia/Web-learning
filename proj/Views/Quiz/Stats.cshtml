@@ -75,13 +75,13 @@
                                         if (Model.GetPoints((uint)i + 1) == 1.0)
                                         {
                                             <span style="color: green">DOBRZE</span>
-                                            <span style="color: green">Uzyskałeś: @Model.GetPoints((uint)i + 1) Punktów</span>
+                                            <span style="color: dimgray">@Model.GetPoints((uint)i + 1) pkt.</span>
                                         }
 
                                         else
                                         {
                                             <span style="color: red">ŹLE</span>
-                                            <span style="color: red">Uzyskałeś: @Model.GetPoints((uint)i + 1) Punktów</span>
+                                            <span style="color: dimgray">@Model.GetPoints((uint)i + 1) pkt.</span>
                                         }
                                     }
 
@@ -92,7 +92,7 @@
                         <div id="@collapsenumber" class="collapse" aria-labelledby="@headingnumber" data-parent="#accordionExample">
                             <div class="card-body">
                                 @{
-                                    <p>Twoje odpowiedzi:</p>
+                                    <p><b>Twoje odpowiedzi:</b></p>
 
 
                                     for (int j = 0; j < usersAnswers.Count; j++)
@@ -103,7 +103,7 @@
                                 }
                                 <br />
                                 @{
-                                    <p>Poprawne odpowiedzi:</p>
+                                    <p><b>Poprawne odpowiedzi:</b></p>
 
 
                                     for (int j = 0; j < correctAnswers.Count; j++)

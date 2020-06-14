@@ -19,7 +19,7 @@
                             <button type="submit" name="ID" value=@Model.Quizes.ToList()[i].IdQuiz class="btn btn-link">@Model.Quizes.ToList()[i].QuizName</button>
 
                             <p style="float: right; text-align: right">
-                                <input id="EditQuiz" onclick="location.href='@Url.Action("MyProfile", "Home")'" type="button" value="Edytuj" class="btn btn-secondary btn-sm" />
+                                <input id="EditQuiz" onclick="location.href='@Url.Action("EditQuiz", "Quiz")'" type="button" value="Edytuj" class="btn btn-secondary btn-sm" />
                                 <input id="DeleteQuiz" onclick="location.href='@Url.Action("DeleteQuiz", "Home", new { @id = @Model.Quizes.ToList()[i].IdQuiz })'" type="button" value="Usuń" class="btn btn-secondary btn-sm" />
 
 
