@@ -1,0 +1,94 @@
+﻿@model proj.Models.Quiz
+@{
+    ViewData["Title"] = "EditQuiz";
+}
+
+
+    <div class="jumbotron">
+        <h1 class="display-4">Edytuj Quiz</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="EditQuiz" method="post">
+                    <br />
+                    <div class="form-group">
+                        <label for="quizname" class="control-label">Nazwa quizu</label>
+                        <input type="text" id="quizname" name="quizname" class="form-control" value="" placeholder="Nazwa Twojego quizu" required />
+                        <span asp-validation-for="@Model.QuizName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category" class="control-label">Kategoria</label>
+                        <select id="category" name="category">
+                            @for (int i = 0; i < Category.CATEGORIES.Length - 1; i++)
+                            {
+                                <option value=@Category.CATEGORIES[i]>@Category.CATEGORIES[i]</option>
+                            }
+                            <option selected value=@Category.CATEGORIES[Category.CATEGORIES.Length - 1]>@Category.CATEGORIES[Category.CATEGORIES.Length - 1]</option>
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+
+                        <p>@Model.Questions.ToList().Count</p>
+
+
+
+                    <!-- PYTANIE  -->
+
+
+                    <div class="form-group">
+                        <label for="type_question" class="control-label">Rodzaj</label>
+                        <select id="type_question" name="type_question">
+                            <option selected value=@QuestionTypes.TYPES.ToList()[0].Key>@QuestionTypes.TYPES.ToList()[0].Value</option>
+                            @for (int i = 1; i < QuestionTypes.TYPES.ToList().Count; i++)
+                            {
+                                <option value=@QuestionTypes.TYPES.ToList()[i].Key>@QuestionTypes.TYPES.ToList()[i].Value</option>
+                            }
+
+                        </select>
+                    </div>
+
+                    <section id="answers">
+                        <p>Odpowiedzi</p>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="radio" id="qa0_bool" name="qbool" value="q1">
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" id="qa1" name="qa1" value="" placeholder="Treść odpowiedzi" required>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="radio" id="qa1_bool" name="qbool" value="q2">
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" id="qa2" name="qa2" value="" placeholder="Treść odpowiedzi" required>
+                        </div>
+
+
+                        <div id="additional_answer">
+                            <button id="add_answer" class="btn btn-link">Dodaj kolejną odpowiedź</button>
+                        </div>
+                    </section>
+
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" name="submit" value="Dodaj następne pytanie" class="btn btn-primary btn-sm" />
+                    </div>
+
+                    <hr class="my-4">
+                    <div class="form-group">
+                        <input type="submit" name="submit" value="Stwórz" class="btn btn-primary" />
+                        <input id="Start" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Powrót" class="btn btn-secondary" />
+                    </div>
+
+
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>

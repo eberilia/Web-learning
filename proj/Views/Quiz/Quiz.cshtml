@@ -1,0 +1,94 @@
+﻿@model proj.Models.Quiz
+@{
+}
+
+<div class="jumbotron">
+    <input id="Return" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Powrót" class="btn btn-secondary btn-sm float-right" />
+
+
+    <form asp-action="Stats" asp-route-id="@Model.IdQuiz" method="post">
+        <h1 class="display-4">@Model.QuizName</h1>
+        @{
+            int j = 1;
+
+            <br />
+            foreach (Question q in Model.Questions)
+            {
+                <h6><b>Pytanie @j</b></h6>
+                <h5>@q.TextQuestion</h5>
+
+                string n = "q" + j;
+
+                string[] answers = { q.Answer1, q.Answer2, q.Answer3, q.Answer4, q.Answer5, q.Answer6, q.Answer7, q.Answer8 };
+
+                for (int i = 0; i < answers.Length; i++)
+                {
+
+                    string id = n + "a" + (i + 1);
+
+                    if (answers[i] == null)
+                        break;
+
+                    @if (q.QuestionType.Equals("radio"))
+                    {
+                        <div class="custom-control custom-radio">
+                            <input type=@q.QuestionType class="custom-control-input" id=@id name=@n value="@answers[i]" required>
+                            <label class="custom-control-label" for=@id>@answers[i]</label><br>
+                        </div>
+                    }
+                    else if (q.QuestionType.Equals("checkbox"))
+                    {
+                        <div class="custom-control custom-checkbox">
+                            <input type=@q.QuestionType class="custom-control-input" id=@id name=@n value="@answers[i]">
+                            <label class="custom-control-label" for=@id>@answers[i]</label><br>
+                        </div>
+                    }
+
+                }
+
+
+
+                <br />
+                j++;
+            }
+
+            <hr class="my-4">
+            <input type="submit" value="Koniec" class="btn btn-primary btn-block">
+
+        }
+
+    </form>
+
+</div>
+
+<div>
+
+
+</div>
+
+<!--
+
+<br />
+<h4>STATYCZNY QUIZ - OLD VERSION</h4>
+<form asp-action="Stats">
+    <p>Ile bokow ma kwadrat</p>
+    <input type="radio" id="q1id1" name="q1" value="2">
+    <label for="q1id1">2</label><br>
+    <input type="radio" id="q1id2" name="q1" value="3">
+    <label for="q1id2">3</label><br>
+    <input type="radio" id="q1id3" name="q1" value="4">
+    <label for="q1id3">4</label>
+
+    <br>
+    <br>
+
+    <p>Cos0 to....?</p>
+    <input type="radio" id="q2id1" name="q2" value="(pierwiastek z 2)/2">
+    <label for="q2id1">(pierwiastek z 2)/2</label><br>
+    <input type="radio" id="q2id2" name="q2" value="0">
+    <label for="q2id2">0</label><br>
+    <input type="radio" id="q2id3" name="q2" value="1">
+    <label for="q2id3">1</label><br><br>
+
+    <input type="submit" value="Koniec">
+</form>-->

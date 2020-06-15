@@ -1,0 +1,140 @@
+﻿@model proj.Models.Score
+@{
+    ViewData["Title"] = "Home Page";
+
+    string m030 = "UPS...";
+    string m3160 = "NIEŹLE!";
+    string m6190 = "SUPER!";
+    string m91100 = "GRATULACJE!";
+
+    string mess030 = "Może spróbuj jeszcze raz?";
+    string mess3160 = "Popracuj jeszcze trochę!";
+    string mess6190 = "Dobrze Ci poszło!";
+    string mess91100 = "Jesteś mistrzem!";
+}
+
+
+<div>
+    <div class="jumbotron">
+        <h2 class="display-4">
+            @{
+                if (@Model.GetPercent() <= 30)
+                {
+                    <span style="color: #0069D9"><b>@m030</b></span> @mess030;
+                }
+                else if (@Model.GetPercent() > 30 && @Model.GetPercent() <= 60)
+                {
+                    <span style="color: #0069D9"><b>@m3160</b></span> @mess3160;
+                }
+                else if (@Model.GetPercent() > 60 && @Model.GetPercent() <= 90)
+                {
+                    <span style="color: #0069D9"><b>@m6190</b></span> @mess6190;
+                }
+                else
+                {
+                    <span style="color: #0069D9"><b>@m91100</b></span> @mess91100;
+                }
+            }
+        </h2>
+        <p class="lead">
+            <b>Twoj wynik: <b>@Math.Round(Model.GetPercent()) %</b></b>
+        </p>
+        <hr class="my-4">
+
+
+        @{
+            //for (int i = 0; i < Model.UserCorrectnessAnswers.Count; i++)
+            for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                string n = "Q" + (i + 1);
+                string collapsenumber = "collapse" + n;
+                string headingnumber = "heading" + n;
+
+                /*tresc pytania*/
+                string question = "Pytanie " + (i + 1) + ": " + Model.Questions[i].TextQuestion;
+                /*lista poprawnych odp*/
+                List<string> allAnswers = Model.AllAnswers[(uint)i + 1];
+
+                List<string> correctAnswers = Model.AnswersCorrect[(uint)i + 1];
+
+                //string correctanswer = "Poprawna odpowiedź: " + Model.CorrectAnswers[i];
+
+
+                /*lista odpowiedzi uzytkownika*/
+                //string youranswer = "Twoja odpowiedź: " + ViewData[n];
+                List<string> usersAnswers = Model.UserAnswers[(uint)i + 1];
+
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="@headingnumber">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#@collapsenumber" aria-expanded="false" aria-controls="@collapsenumber">
+                                    <span style="color: black">@question</span>
+
+                                    @{
+                                        if (Model.GetPoints((uint)i + 1) == 1.0)
+                                        {
+                                            <span style="color: green">DOBRZE</span>
+                                            <span style="color: dimgray">@Model.GetPoints((uint)i + 1) pkt.</span>
+                                        }
+
+                                        else
+                                        {
+                                            <span style="color: red">ŹLE</span>
+                                            <span style="color: dimgray">@Model.GetPoints((uint)i + 1) pkt.</span>
+                                        }
+                                    }
+
+
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="@collapsenumber" class="collapse" aria-labelledby="@headingnumber" data-parent="#accordionExample">
+                            <div class="card-body">
+                                @{
+                                    <p><b>Twoje odpowiedzi:</b></p>
+
+
+                                    for (int j = 0; j < usersAnswers.Count; j++)
+                                    {
+                                        <p>@usersAnswers[j]</p>
+                                    }
+
+                                }
+                                <br />
+                                @{
+                                    <p><b>Poprawne odpowiedzi:</b></p>
+
+
+                                    for (int j = 0; j < correctAnswers.Count; j++)
+                                    {
+
+                                        <p>@correctAnswers[j]</p>
+                                    }
+
+                                }
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        }
+
+
+        <br />
+        <form asp-action="Quiz">
+            <button type="submit" name="ID" value=@Model.IdQuiz class="btn btn-primary">Spróbuj jeszcze raz</button>
+            <input id="Back" onclick="location.href='@Url.Action("Index", "Home")'" type="button" value="Powrót" class="btn btn-secondary" />
+        </form>
+        
+
+    </div>
+</div>
+
+
+

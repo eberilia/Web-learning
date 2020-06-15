@@ -1,8 +1,33 @@
-﻿@{
+﻿@model proj.Models.User
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@if (DataStorage.IsLoggedIn())
+{
+    <div class="jumbotron">
+        <h1 class="display-4">Witamy na Quiz<span style="color: #0069D9"><b>IT</b></span>, @DataStorage.CurrentlyLoggedInUsername!</h1>
+        <p class="lead"><br />QuizIT to platforma umożliwiająca naukę poprzez rozwiązywanie quizów.<br />Możesz tu tworzyć i udostępniać własne quizy lub korzystać z zestawów utworzonych przez innych użytkowników.</p>
+        <hr class="my-4">
+        <p>Wybierz quiz dla siebie lub stwórz własny :)</p>
+        <input id="Start" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Wyszukaj quiz" class="btn btn-primary btn-lg" />
+        <input id="Nowy" onclick="location.href='@Url.Action("CreateQuiz", "Quiz")'" type="button" value="Stwórz nowy quiz" class="btn btn-primary btn-lg" />
+    </div>
+}
+else
+{
+<div class="jumbotron">
+    <h1 class="display-4">Witamy na Quiz<span style="color: #0069D9"><b>IT</b></span>!</h1>
+    <p class="lead"><br />QuizIT to platforma umożliwiająca naukę poprzez rozwiązywanie quizów.<br />Możesz tu tworzyć i udostępniać własne quizy lub korzystać z zestawów utworzonych przez innych użytkowników.</p>
+
+    <input id="Search" onclick="location.href='@Url.Action("Index", "Quiz")'" type="button" value="Wyszukaj quiz" class="btn btn-primary btn-lg" />
+
+    <hr class="my-4">
+    <p>Chcesz utworzyć quiz i korzystać ze wszystkich możliwości platformy?</p>
+    <div>
+        <input id="signin" onclick="location.href='@Url.Action("Login", "Home")'" type="button" value="Zaloguj się" class="btn btn-secondary btn" />
+        <input id="signup" onclick="location.href='@Url.Action("CreateUser", "Home")'" type="button" value="Zarejestruj się" class="btn btn-secondary btn" />
+    </div>
 </div>
+
+}
