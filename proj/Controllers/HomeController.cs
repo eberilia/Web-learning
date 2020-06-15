@@ -125,6 +125,18 @@ namespace proj.Controllers
 
             return View(exampleUser);
 
+        }
+
+
+        public IActionResult ShowUser(string name)
+        {
+            List<Quiz> quizyUzytkownika = _quiz.GetUsersQuizes(name);
+
+            User exampleUser = new User();
+            exampleUser = _user.GetUser(name);
+            exampleUser.Quizes = quizyUzytkownika;
+
+            return View(exampleUser);
 
         }
 
