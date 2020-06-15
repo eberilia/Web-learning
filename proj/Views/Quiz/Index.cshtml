@@ -33,8 +33,9 @@
                                 <button type="submit" name="ID" value=@ViewBag.quizes[i].IdQuiz class="btn btn-primary btn-lg btn-block">@ViewBag.quizes[i].QuizName</button>
                             </div>
                             <div class="col-2">
-                                <input id="ShowUser" onclick="location.href='@Url.Action("ShowUser", "Home")'" type="button" value=@ViewBag.quizes[i].UsernameFK class="btn btn-secondary btn-lg btn-block" />
-                                
+                                <input id="ShowUser" onclick="location.href='@Url.Action("ShowUser", "Home", new { @name = ViewBag.quizes[i].UsernameFK })'" type="button" value=@ViewBag.quizes[i].UsernameFK class="btn btn-secondary btn-lg btn-block" />
+
+                             
                             </div>
                            
                         </section>
