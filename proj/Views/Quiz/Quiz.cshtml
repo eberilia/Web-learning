@@ -7,7 +7,7 @@
 
 
     <form asp-action="Stats" asp-route-id="@Model.IdQuiz" method="post">
-        <h1 class="display-4">QUIZ O ID: @ViewData["ID"]</h1>
+        <h1 class="display-4">@Model.QuizName</h1>
         @{
             int j = 1;
 
