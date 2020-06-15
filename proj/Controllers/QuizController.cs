@@ -184,6 +184,90 @@ namespace proj.Controllers
             
         }
 
+        [HttpGet]
+        public IActionResult EditQuiz(uint id)
+        {
+            Quiz quiz = new Quiz();
+            quiz = _quiz.GetQuiz(id);
+            //System.Diagnostics.Debug.WriteLine(id);
+            return View(quiz);
+
+        }
+
+        [HttpPost]
+        public IActionResult EditQuiz(string submit, string quizname, string category,
+            string type_question, string q,
+            string qa1, string qa2, string qa3, string qa4,
+            string qa5, string qa6, string qa7, string qa8, string[] qbool)
+        {
+
+            //System.Diagnostics.Debug.WriteLine(type);
+
+            Quiz quiz = new Quiz();
+            quiz.QuizName = quizname;
+            quiz.Category = category;
+
+            quiz.UsernameFK = DataStorage.CurrentlyLoggedInUsername;
+            _quiz.AddQuiz(quiz);
+
+
+            List<Quiz> usersQuizes = _quiz.GetUsersQuizes(DataStorage.CurrentlyLoggedInUsername);
+            uint actualIdQuiz = usersQuizes[usersQuizes.Count - 1].IdQuiz;
+
+
+            Question question = new Question();
+            question.TextQuestion = q;
+            question.QuestionType = type_question;
+            question.IdQuizFK = actualIdQuiz;
+
+            question.Answer1 = qa1;
+            question.Answer2 = qa2;
+
+            if (qa3 != null) question.Answer3 = qa3;
+            if (qa4 != null) question.Answer4 = qa4;
+            if (qa5 != null) question.Answer5 = qa5;
+            if (qa6 != null) question.Answer6 = qa6;
+            if (qa7 != null) question.Answer7 = qa7;
+            if (qa8 != null) question.Answer8 = qa8;
+
+
+            for (int i = 0; i < qbool.Length; i++)
+            {
+
+                if (qbool[i].ElementAt(1) == '1')
+                    question.Answer1Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '2')
+                    question.Answer2Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '3')
+                    question.Answer3Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '4')
+                    question.Answer4Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '5')
+                    question.Answer5Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '6')
+                    question.Answer6Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '7')
+                    question.Answer7Bool = true;
+
+                else if (qbool[i].ElementAt(1) == '8')
+                    question.Answer8Bool = true;
+
+            }
+
+            _question.AddQuestion(question);
+
+            if (submit.Equals("Dodaj następne pytanie"))
+                return RedirectToAction("AddQuestion", new { @id = actualIdQuiz });
+            else
+                return RedirectToAction("Index");
+        }
+
         public IActionResult Quiz(uint ID)
         {
             ViewData["ID"] = ID;
